@@ -4,4 +4,11 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ITLOOP_HFT_2021221.Data\ITLOOP_HFT_2021221.Data.csproj" />
+    <ProjectReference Include="..\ITLOOP_HFT_2021221.Logic\ITLOOP_HFT_2021221.Logic.csproj" />
+    <ProjectReference Include="..\ITLOOP_HFT_2021221.Models\ITLOOP_HFT_2021221.Models.csproj" />
+    <ProjectReference Include="..\ITLOOP_HFT_2021221.Repository\ITLOOP_HFT_2021221.Repository.csproj" />
+  </ItemGroup>
+
 </Project>
