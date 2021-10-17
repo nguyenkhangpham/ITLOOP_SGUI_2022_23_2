@@ -20,6 +20,6 @@ namespace ITLOOP_HFT_2021221.Data
                 context.StudentId.Add(new StudentId { Url = "http://test.com" });
             }
         context.SaveChanges();
-    }
+    
     }
 }
