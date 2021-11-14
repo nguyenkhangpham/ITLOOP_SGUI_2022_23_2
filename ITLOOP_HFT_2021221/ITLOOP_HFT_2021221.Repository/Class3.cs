@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ITLOOP_HFT_2021221.Repository
 {
-    class Class3
+    public class Class3
     {
     }
 }
