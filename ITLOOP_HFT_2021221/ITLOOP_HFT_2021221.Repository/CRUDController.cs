@@ -8,14 +8,14 @@ using System.Web.Mvc;
 
 namespace ITLOOP_HFT_2021221.Repository
 {
-    class CRUDController : Controller
+    public class CRUDController : Controller
     {
-        public ActionResult create()
+        public ActionResult Create()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult create(Student model)
+        public ActionResult Create(Student model)
         {
             using (var context = new demoCRUDEntities())
             {
