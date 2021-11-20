@@ -8,23 +8,22 @@ using System.Threading.Tasks;
 
 namespace ITLOOP_HFT_2021221.Models
 {
-    [Table("Brand")]
-    //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    class Brand
+    [Table("Renting")]
+    public class Renting
     {
         [Key]
-        public int Id { get; set; }
-        [Required]
-        [MaxLength(50)]
-        public string Name { get; set; }
-        public int Amount { get; set; }
-        public int CarId { get; set; }
+        public int RentID { get; set; }
 
-        [ForeignKey("ReceiptId ")]
+        [MaxLength(30)]
+        public string RenterName { get; set; }
+
+        public int Amount { get; set; }
 
         [NotMapped]
         public virtual Car Car { get; set; }
 
+        [ForeignKey(nameof(Car))]
+        public int CarID { get; set; }
 
     }
 }

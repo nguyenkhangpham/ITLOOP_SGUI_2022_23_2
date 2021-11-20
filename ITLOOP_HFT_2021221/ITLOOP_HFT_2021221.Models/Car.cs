@@ -9,18 +9,25 @@ using System.Threading.Tasks;
 namespace ITLOOP_HFT_2021221.Models
 {
     [Table("Car")]
-    class Car
+    public class Car
     {
         [Key]
-        public int Id { get; set; }
-        [Required]
+        public int CarID { get; set; }
+
         [MaxLength(50)]
-        public string Name { get; set; }
-        public int Price { get; set; }
+        public string CarName { get; set; }
 
         [NotMapped]
-        public virtual ICollection<Brand> Brands { get; set; }
+        public virtual CarStore CarStore { get; set; }
 
+        [ForeignKey(nameof(CarStore))]
+        public int CarStoreID { get; set; }
 
+        public virtual ICollection<Renting> Rentings { get; set; }
+
+        public Car()
+        {
+            Rentings = new HashSet<Renting>();
+        }
     }
 }
