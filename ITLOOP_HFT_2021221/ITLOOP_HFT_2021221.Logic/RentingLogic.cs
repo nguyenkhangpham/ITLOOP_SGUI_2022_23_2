@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using ITLOOP_HFT_2021221.Models;
+using ITLOOP_HFT_2021221.Repository;
+using Microsoft.EntityFrameworkCore;
 
-namespace ITLOOP_HFT_2021221.Repository
+namespace ITLOOP_HFT_2021221.Logic
 {
-    class RentingRepository : Repository<Renting>, IRentingRepository
+    public class RentingLogic : Repository<Car>, ICarRepository
     {
-        public RentingRepository(DbContext dbc):base(dbc)
+        public RentingLogic(DbContext dbc) : base(dbc)
         {
 
         }
@@ -29,15 +30,15 @@ namespace ITLOOP_HFT_2021221.Repository
         //Update
         public void ChangeAmount(int id, int newAmount)
         {
-            var rent = GetOne(id);
-            rent.Amount = newAmount;
+            var bid = GetOne(id);
+            bid.Amount = newAmount;
             dbc.SaveChanges();
         }
 
         public void ChangeBidderName(int id, string NewName)
         {
-            var rent = GetOne(id);
-            rent.RenterName = NewName;
+            var bid = GetOne(id);
+            bid.RenterName = NewName;
             dbc.SaveChanges();
         }
 
