@@ -42,5 +42,85 @@ namespace ITLOOP_HFT_2021221.Logic
             this.Dbc.Set<Car>().Remove(car);
             this.Dbc.SaveChanges();
         }
+        public IEnumerable<int> GetIdPeopleRentingCar()
+        {
+            List<int> list = new List<int>();
+
+
+
+            //foreach (var item in c)
+            //{
+            //    if()
+            //    Console.WriteLine(item);
+            //    list.Add(item);
+            //}
+
+            return list;
+
+        }
+        public IEnumerable<int> GetNumberOfAvailbleRentingCar()
+        {
+            List<int> list = new List<int>();
+
+
+
+            //foreach (var item in c)
+            //{
+            //    if()
+            //    Console.WriteLine(item);
+            //    list.Add(item);
+            //}
+
+            return list;
+
+        }
+        public IEnumerable<string> GetNameOfCar()
+        {
+            List<string> list = new List<string>();
+
+
+
+            //foreach (var item in c)
+            //{
+            //    if()
+            //    Console.WriteLine(item);
+            //    list.Add(item);
+            //}
+
+            return list;
+
+        }
+        public IEnumerable<int> GetIdPeopleRentingCarLater()
+        {
+            List<int> list = new List<int>();
+
+
+
+            //foreach (var item in c)
+            //{
+            //    if()
+            //    Console.WriteLine(item);
+            //    list.Add(item);
+            //}
+
+            return list;
+
+        }
+        public IEnumerable<int> GetIdPeopleBooking()
+        {
+            List<int> list = new List<int>();
+
+
+
+            //foreach (var item in c)
+            //{
+            //    if()
+            //    Console.WriteLine(item);
+            //    list.Add(item);
+            //}
+
+            return list;
+
+        }
     }
 }

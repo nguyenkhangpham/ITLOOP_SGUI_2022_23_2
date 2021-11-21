@@ -9,11 +9,16 @@ using System.Threading.Tasks;
 
 namespace ITLOOP_HFT_2021221.Logic
 {
-    public class CarStoreLogic : Repository<Car>, ILogic
+    public class CarStoreLogic : Logic, ICarStoreLogic
     {
-        public CarStoreLogic(DbContext dbc) : base(dbc)
+        CarStoreLogic carStore;
+        Car car;
+        Renting renting;
+        public CarStoreLogic(DbContext dbc) 
         {
-
+            this.car = car;
+            this.carStore = carStore;
+            this.renting = renting;
         }
         public override void Insert(CarStore entity)
         {
@@ -46,6 +51,86 @@ namespace ITLOOP_HFT_2021221.Logic
             CarStore cars = this.GetOne(id);
             this.Dbc.Set<CarStore>().Remove(cars);
             this.Dbc.SaveChanges();
+        }
+        public IEnumerable<int> GetIdPeopleRentingCar()
+        {
+            List<int> list = new List<int>();
+
+
+
+            //foreach (var item in c)
+            //{
+            //    if()
+            //    Console.WriteLine(item);
+            //    list.Add(item);
+            //}
+
+            return list;
+
+        }
+        public IEnumerable<int> GetNumberOfAvailbleRentingCar()
+        {
+            List<int> list = new List<int>();
+
+
+
+            //foreach (var item in c)
+            //{
+            //    if()
+            //    Console.WriteLine(item);
+            //    list.Add(item);
+            //}
+
+            return list;
+
+        }
+        public IEnumerable<string> GetNameOfCar()
+        {
+            List<string> list = new List<string>();
+
+
+
+            //foreach (var item in c)
+            //{
+            //    if()
+            //    Console.WriteLine(item);
+            //    list.Add(item);
+            //}
+
+            return list;
+
+        }
+        public IEnumerable<int> GetIdPeopleRentingCarLater()
+        {
+            List<int> list = new List<int>();
+
+
+
+            //foreach (var item in c)
+            //{
+            //    if()
+            //    Console.WriteLine(item);
+            //    list.Add(item);
+            //}
+
+            return list;
+
+        }
+        public IEnumerable<int> GetIdPeopleBooking()
+        {
+            List<int> list = new List<int>();
+
+
+
+            //foreach (var item in c)
+            //{
+            //    if()
+            //    Console.WriteLine(item);
+            //    list.Add(item);
+            //}
+
+            return list;
+
         }
     }
 }

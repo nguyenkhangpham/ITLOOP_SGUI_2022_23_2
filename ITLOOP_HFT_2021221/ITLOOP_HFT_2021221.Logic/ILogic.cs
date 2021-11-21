@@ -14,6 +14,10 @@ namespace ITLOOP_HFT_2021221.Logic
         IEnumerable<T> GetAll();
         void Insert(T entity); //create
         void Remove(int id); // delete
+        //public void Create();
+        //public void Read();
+        //public void Update();
+        //public void Delete();
     }
     public interface ICarStoreLogic : ILogic<CarStore>
     {
@@ -28,4 +32,5 @@ namespace ITLOOP_HFT_2021221.Logic
     {
         void ChangeAmount(int id, int newAmount);
     }
+
 }
