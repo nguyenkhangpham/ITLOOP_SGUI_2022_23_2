@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ITLOOP_HFT_2021221.Logic
 {
-    public class CarLogic : Repository<Car>, ILogic
+    public class CarLogic : Repository<Car>, ICarRepository
     {
         public CarLogic(DbContext dbc) : base(dbc)
         {
