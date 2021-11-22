@@ -28,7 +28,14 @@ namespace ITLOOP_HFT_2021221.Test
         {
             throw new NotImplementedException();
         }
+        [Test]
+        public void GetNewDisplayNameOnNull()
+        {
+            // Arrange
 
+            // Act - Assert
+            //var exception = Assert.Throws(typeof(ArgumentNullException), () => AttributeHelper.GetPropertyDisplayName<TestClass>(null));
+        }
         [Test]
         public void GetDisplayNameOnNull()
         {
@@ -75,6 +82,7 @@ namespace ITLOOP_HFT_2021221.Test
 
             Assert.AreEqual(7, result);
         }
+
     }
 
     class TestClass
