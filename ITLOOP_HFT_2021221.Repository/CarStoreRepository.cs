@@ -31,6 +31,11 @@ namespace ITLOOP_HFT_2021221.Repository
             carStore.Infor = newInfor;
             dbc.SaveChanges();
         }
+        public void ChangeOnlyId(int id)
+        {
+            var item = GetOne(id);
+            dbc.SaveChanges();
+        }
 
         public void ChangeCategory(int id, string newCategory)
         {

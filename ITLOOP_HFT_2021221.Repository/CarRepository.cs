@@ -33,6 +33,11 @@ namespace ITLOOP_HFT_2021221.Repository
             item.CarName = newName;
             dbc.SaveChanges();
         }
+        public void ChangeOnlyId(int id)
+        {
+            var item = GetOne(id);
+            dbc.SaveChanges();
+        }
 
         //Delete
         public override void Remove(int id)
