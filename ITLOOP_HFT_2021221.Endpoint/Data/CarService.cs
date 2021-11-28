@@ -24,7 +24,6 @@ namespace ITLOOP_HFT_2021221.Endpoint.Data
                 CarStore = car.CarStore,
                 CarStoreID = car.CarStoreID,
                 Rentings = car.Rentings,
-
             };
             _context.Cars.Add(_car);
             _context.SaveChanges();

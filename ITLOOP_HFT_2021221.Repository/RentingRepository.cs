@@ -8,7 +8,7 @@ using ITLOOP_HFT_2021221.Models;
 
 namespace ITLOOP_HFT_2021221.Repository
 {
-    class RentingRepository : Repository<Renting>, IRentingRepository
+    public class RentingRepository : Repository<Renting>, IRentingRepository
     {
         public RentingRepository(DbContext dbc):base(dbc)
         {

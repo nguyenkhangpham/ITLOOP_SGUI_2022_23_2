@@ -8,7 +8,7 @@ using ITLOOP_HFT_2021221.Models;
 
 namespace ITLOOP_HFT_2021221.Repository
 {
-    class CarRepository : Repository<Car>, ICarRepository
+    public class CarRepository : Repository<Car>, ICarRepository
     {
         public CarRepository(DbContext dbc): base(dbc)
         {
