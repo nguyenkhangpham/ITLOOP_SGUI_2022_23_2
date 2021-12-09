@@ -8,7 +8,7 @@ using System.Net.Http;
 
 namespace ITLOOP_HFT_2021221.Client
 {
-    class RestService
+    public class RestService
     {
         HttpClient client;
 
