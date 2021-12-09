@@ -22,9 +22,7 @@ namespace ITLOOP_HFT_2021221.Models
         public string Category { get; set; }
 
         [NotMapped]
-        public string AllData => $"[{CarStoreID}] : {Infor} : {Category} (Views: {ViewCount}) (Items: {Cars.Count()})";
-
-        public int? ViewCount { get; set; }   //int? can be any int value + NULL
+        public string AllData => $"[{CarStoreID}] : {Infor} : {Category} (Items: {Cars.Count()})";
 
         public virtual ICollection<Car> Cars { get; set; }
 

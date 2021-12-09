@@ -16,6 +16,7 @@ namespace ITLOOP_HFT_2021221.Models
 
         [MaxLength(50)]
         public string CarName { get; set; }
+        public int SellingPrice { get; set; }
 
         [NotMapped]
         public virtual CarStore CarStore { get; set; }
@@ -23,7 +24,7 @@ namespace ITLOOP_HFT_2021221.Models
         [ForeignKey(nameof(CarStore))]
         public int CarStoreID { get; set; }
 
-        public virtual ICollection<Renting> Rentings { get; set; }
+        public virtual ICollection<Renting> Rentings { get; set; }  
 
         public Car()
         {

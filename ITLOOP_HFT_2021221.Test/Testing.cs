@@ -5,62 +5,206 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ITLOOP_HFT_2021221.Models;
+using ITLOOP_HFT_2021221.Logic;
+using ITLOOP_HFT_2021221.Repository;
+using Moq;
+using Newtonsoft.Json;
+using ITLOOP_HFT_2021221.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ITLOOP_HFT_2021221.Test
 {
     [TestFixture]
     public class Tesing
     {
-        [TestCase("Test1", "Test1")]
-        [TestCase("Test2", "Test2")]
-        public void GetDisplayNameSuccessfullyTest(string propName, string expectedName)
+        CarLogic cl;
+        CarStoreLogic csl;
+        RentingLogic rl;
+        private AppDbContext Context { get; set; }
+        [SetUp]
+        public void SetUp()
         {
-            // Arrange
+            var contextBuilder = new DbContextOptionsBuilder<AppDbContext>();
 
-            // Act
-            var dispName = Tesing.GetPropertyDisplayName<TestClass>(propName);
+            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True";
 
-            // Assert
-            Assert.That(dispName, Is.EqualTo(expectedName));
+            contextBuilder.UseSqlServer(connectionString);
+
+            Context = new AppDbContext(contextBuilder.Options);
+
+
         }
 
-        private static object GetPropertyDisplayName<T>(string propName)
+        [SetUp]
+        public void Init()
         {
-            throw new NotImplementedException();
+            var mockCarRepository =
+                new Mock<ICarRepository>();
+
+            CarStore carStore = new CarStore();
+            carStore.CarStoreID = 1;
+            carStore.Infor = "Electric";
+            carStore.Category = "Rental Electric car";
+            var cars = new List<Car>()
+                {
+                    new Car(){
+                        CarID = 1,
+                        CarName = "Ferrari",
+                        SellingPrice = 55000
+                    },
+                    new Car(){
+                        CarID = 2,
+                        CarName = "Audi",
+                        SellingPrice = 85000
+                    }
+                };
+
+            mockCarRepository.Setup((t) => t.GetAll())
+                .Returns((IQueryable<Car>)cars);
+
+            cl = new CarLogic(
+                mockCarRepository.Object);
         }
         [Test]
-        public void GetNewDisplayNameOnNull()
+        public void CreateNewCarTest()
         {
-            // Arrange
+            //ARRANGE
+            Car car1 = new Car() { CarID = 1, CarName = "Lamborgini", SellingPrice = 87693 };
+            Car car2 = new Car() { CarID = 2, CarName = "Ferrari", SellingPrice = 35643 };
+            Car car3 = new Car() { CarID = 3, CarName = "Toyota", SellingPrice = 64815 };
 
-            // Act - Assert
-            //var exception = Assert.Throws(typeof(ArgumentNullException), () => AttributeHelper.GetPropertyDisplayName<TestClass>(null));
+            ICarRepository repository = new CarRepository(Context);
+
+            //ACT-ASSERT
+            Assert.That(() => repository.Insert(car1), Throws.Nothing);
+            Assert.That(() => repository.Insert(car2), Throws.InnerException);
+            Assert.That(() => repository.Insert(car3), Throws.InnerException);
         }
         [Test]
-        public void GetDisplayNameOnNull()
+        public void CreateNewCarStoreTest()
         {
-            // Arrange
+            //ARRANGE
+            CarStore car1 = new CarStore() { CarStoreID = 1, Category = "Electric", Infor = "Rental Electric car" };
+            CarStore car2 = new CarStore() { CarStoreID = 2, Category = "Gasoline", Infor = "Rental Gasoline car" };
+            CarStore car3 = new CarStore() { CarStoreID = 3, Category = "Sport", Infor = "Rental Sport car" };
 
-            // Act - Assert
-            //var exception = Assert.Throws(typeof(ArgumentNullException), () => AttributeHelper.GetPropertyDisplayName<TestClass>(null));
+            ICarStoreRepository repository = new CarStoreRepository(Context);
+
+            //ACT-ASSERT
+            Assert.That(() => repository.Insert(car1), Throws.Nothing);
+            Assert.That(() => repository.Insert(car2), Throws.InnerException);
+            Assert.That(() => repository.Insert(car3), Throws.InnerException);
         }
         [Test]
-        public void Debit_WhenAmountIsMoreThanBalance_ShouldThrowArgumentOutOfRange()
+        public void CreateNewRentingTest()
         {
-            // Arrange
-            double beginningBalance = 11.99;
-            double debitAmount = 20.0;
-            CarStore account = new CarStore() { CarStoreID = 1, Category = "Electric", Infor = "Rental Electric car", ViewCount = 275 };
+            //ARRANGE
+            Renting r1 = new Renting() { RentID = 2, RenterName = "John Barnaby", Amount = 1220 };
+            Renting r2 = new Renting() { RentID = 3, RenterName = "Annette Batchelor", Amount = 120 };
+            Renting r3 = new Renting() { RentID = 4, RenterName = "Bill Bradbury", Amount = 2600 };
 
-            // Act
-            try
+            IRentingRepository repository = new RentingRepository(Context);
+
+            //ACT-ASSERT
+            Assert.That(() => repository.Insert(r1), Throws.Nothing);
+            Assert.That(() => repository.Insert(r2), Throws.InnerException);
+            Assert.That(() => repository.Insert(r3), Throws.InnerException);
+        }
+        [Test]
+        public void GetInforOfNewCarsHaveIdHigherThan100Test()
+        {
+            //ACT
+            var result = csl.GetInforOfNewCarsHaveIdHigherThan100();
+
+            //ASSERT
+            var list = new List
+                <KeyValuePair<string, int>>()
             {
+                new KeyValuePair<string, int>
+                ("Rental Electric car", 50)
+            };
+            Assert.That(result, Is.EqualTo(list));
+        }
+        [Test]
+        public void GEtCarStoreIdHigherThan20Test()
+        {
+            //ACT
+            var result = csl.GetCarStoreIdLessThan10();
 
-            }
-            catch (System.ArgumentOutOfRangeException e)
+            //ASSERT
+            var list = new List
+                <KeyValuePair<string, int>>()
             {
-                // Assert
-            }
+                new KeyValuePair<string, int>
+                ("Gasole", 10)
+            };
+            Assert.That(result, Is.EqualTo(list));
+        }
+        [Test]
+        public void GetCarStoreIdLessThan10Test()
+        {
+            //ACT
+            var result = csl.GetCarStoreIdLessThan10();
+
+            //ASSERT
+            var list = new List
+                <KeyValuePair<string, int>>()
+            {
+                new KeyValuePair<string, int>
+                ("Electric", 1)
+            };
+            Assert.That(result, Is.EqualTo(list));
+        }
+        [Test]
+        public void GetLowLevelCarTest()
+        {
+            //ACT
+            var result = cl.GetLowLevelCar();
+
+            //ASSERT
+            var list = new List
+                <KeyValuePair<string, int>>()
+            {
+                new KeyValuePair<string, int>
+                ("Toyota", 5000)
+            };
+            Assert.That(result, Is.EqualTo(list));
+        }
+        /*
+         public IEnumerable<int> GetCarStoreIdLessThan10();
+        public IEnumerable<int> GEtCarStoreIdHigherThan20();
+        public IEnumerable<string> GetInforOfNewCarsHaveIdHigherThan100();
+        */
+
+        [Test]
+        public void GetNormalLevelCarTest()
+        {
+            //ACT
+            var result = cl.GetNormalLevelCar();
+
+            //ASSERT
+            var list = new List
+                <KeyValuePair<string, int>>()
+            {
+                new KeyValuePair<string, int>
+                ("Ferrari", 25000)
+            };
+            Assert.That(result, Is.EqualTo(list));
+        }
+        [Test]
+        public void GetHighLevelCarTest()
+        {
+            //ACT
+            var result = cl.GetHighLevelCar();
+
+            //ASSERT
+            var list = new List
+                <KeyValuePair<string, int>>()
+            {
+                new KeyValuePair<string, int>
+                ("Audi", 150000)
+            };
+            Assert.That(result, Is.EqualTo(list));
         }
         [Test]
         public void Remove_ASubstring_RemovesThatSubstring()
@@ -76,19 +220,12 @@ namespace ITLOOP_HFT_2021221.Test
         [Test]
         public void Adding_4_And_3_Should_Return_7()
         {
-            var calculator = new CarStore() { CarStoreID = 1, Category = "Electric", Infor = "Rental Electric car", ViewCount = 275 };
+            var calculator = new CarStore() { CarStoreID = 1, Category = "Electric", Infor = "Rental Electric car"};
 
             int result = calculator.CarStoreID;
 
             Assert.AreEqual(7, result);
         }
 
-    }
-
-    class TestClass
-    {
-        public int Test1 { get; set; }
-
-        public string Test2 { get; set; }
     }
 }

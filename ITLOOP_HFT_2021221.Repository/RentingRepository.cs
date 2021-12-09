@@ -5,14 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ITLOOP_HFT_2021221.Models;
+using ITLOOP_HFT_2021221.Data;
+
 
 namespace ITLOOP_HFT_2021221.Repository
 {
     public class RentingRepository : Repository<Renting>, IRentingRepository
     {
-        public RentingRepository(DbContext dbc):base(dbc)
+        AppDbContext dbc;
+        public RentingRepository(AppDbContext dbc):base(dbc)
         {
-
+            this.dbc = dbc;
         }
         //Create
         public override void Insert(Renting entity)
@@ -21,25 +24,39 @@ namespace ITLOOP_HFT_2021221.Repository
         }
 
         //Read
+        public Renting Read(int id)
+        {
+            return
+                dbc.Set<Renting>().FirstOrDefault(t => t.RentID == id);
+        }
         public override Renting GetOne(int id)
         {
             return GetAll().SingleOrDefault(x => x.RentID == id);
         }
 
         //Update
-        public void ChangeAmount(int id, int newAmount)
+        public void Update(Renting car)
         {
-            var rent = GetOne(id);
-            rent.Amount = newAmount;
+            var carToUpdate = Read(car.RentID);
+            carToUpdate.RenterName = car.RenterName;
+            carToUpdate.Amount = car.Amount;
+            carToUpdate.CarID = car.CarID;
+            carToUpdate.Car = car.Car;
             dbc.SaveChanges();
         }
+        //public void ChangeAmount(int id, int newAmount)
+        //{
+        //    var rent = GetOne(id);
+        //    rent.Amount = newAmount;
+        //    dbc.SaveChanges();
+        //}
 
-        public void ChangeBidderName(int id, string NewName)
-        {
-            var rent = GetOne(id);
-            rent.RenterName = NewName;
-            dbc.SaveChanges();
-        }
+        //public void ChangeBidderName(int id, string NewName)
+        //{
+        //    var rent = GetOne(id);
+        //    rent.RenterName = NewName;
+        //    dbc.SaveChanges();
+        //}
 
         //Delete
         public override void Remove(int id)
@@ -47,6 +64,11 @@ namespace ITLOOP_HFT_2021221.Repository
             Renting rent = this.GetOne(id);
             this.Dbc.Set<Renting>().Remove(rent);
             this.Dbc.SaveChanges();
+        }
+
+        public IQueryable<Renting> ReadAll()
+        {
+            return dbc.Rentings;
         }
     }
 }

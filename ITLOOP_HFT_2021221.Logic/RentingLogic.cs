@@ -9,45 +9,118 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ITLOOP_HFT_2021221.Logic
 {
-    public class RentingLogic : Repository<Car>, ICarRepository
+    public class RentingLogic : IRentingLogic
     {
-        public RentingLogic(DbContext dbc) : base(dbc)
+        ICarRepository carRepo;
+        ICarStoreRepository carStoreRepo;
+        IRentingRepository rentingRepo;
+        public RentingLogic(IRentingRepository rentingRepo)
         {
-
+            this.rentingRepo = rentingRepo;
         }
-        //Create
-        public override void Insert(Renting entity)
+        public void Insert(Renting car)
         {
-            this.dbc.Set<Renting>().Add(entity);
-        }
-
-        //Read
-        public override Renting GetOne(int id)
-        {
-            return GetAll().SingleOrDefault(x => x.RentID == id);
+            rentingRepo.Insert(car);
         }
 
-        //Update
-        public void ChangeAmount(int id, int newAmount)
+        public IEnumerable<Renting> GetAll()
         {
-            var bid = GetOne(id);
-            bid.Amount = newAmount;
-            dbc.SaveChanges();
+            return rentingRepo.GetAll();
         }
 
-        public void ChangeBidderName(int id, string NewName)
+        public Renting Read(int id)
         {
-            var bid = GetOne(id);
-            bid.RenterName = NewName;
-            dbc.SaveChanges();
+            return rentingRepo.Read(id);
         }
 
-        //Delete
-        public override void Remove(int id)
+        public void Remove(int id)
         {
-            Renting rent = this.GetOne(id);
-            this.Dbc.Set<Renting>().Remove(rent);
-            this.Dbc.SaveChanges();
+            rentingRepo.Remove(id);
+        }
+
+        public void Update(Renting students)
+        {
+            rentingRepo.Update(students);
+        }
+        public IQueryable<Renting> ReadAll()
+        {
+            return rentingRepo.ReadAll();
+        }
+        public IEnumerable<int> GetRentAmountLessThan10000()
+        {
+            List<int> list = new List<int>();
+
+            var car = from p in rentingRepo.ReadAll()
+                      where p.Amount < 10000
+                      select p.Amount;
+
+            foreach (var item in car)
+            {
+                list.Add(item);
+            }
+            return list;
+        }
+        public IEnumerable<int> GetRentAmountHigherThan20000()
+        {
+            List<int> list = new List<int>();
+
+            var car = from p in rentingRepo.ReadAll()
+                      where p.Amount > 20000
+                      select p.Amount;
+
+            foreach (var item in car)
+            {
+                list.Add(item);
+            }
+            return list;
+        }
+        public IEnumerable<int> GetCarIdHasAmountLessThan10000()
+        {
+            List<int> list = new List<int>();
+
+            var car = from x in rentingRepo.ReadAll()
+                      join y in carRepo.ReadAll()
+                      on x.CarID equals y.CarID
+                      where x.Amount < 10000
+                      select y.CarID;
+
+            foreach (var item in car)
+            {
+                list.Add(item);
+            }
+            return list;
+        }
+        public IEnumerable<int> GetCarIdHasAmountHigherThan20000()
+        {
+            List<int> list = new List<int>();
+
+            var car = from x in rentingRepo.ReadAll()
+                      join y in carRepo.ReadAll()
+                      on x.CarID equals y.CarID
+                      where x.Amount >20000
+                      select y.CarID;
+
+            foreach (var item in car)
+            {
+                list.Add(item);
+            }
+            return list;
+        }
+        public IEnumerable<string> GetCarNameHasAmountHigherThan10000()
+        {
+            List<string> list = new List<string>();
+
+            var car = from x in rentingRepo.ReadAll()
+                      join y in carRepo.ReadAll()
+                      on x.CarID equals y.CarID
+                      where x.Amount > 10000
+                      select y.CarName;
+
+            foreach (var item in car)
+            {
+                list.Add(item);
+            }
+            return list;
         }
     }
 }

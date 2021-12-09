@@ -9,118 +9,116 @@ using System.Threading.Tasks;
 
 namespace ITLOOP_HFT_2021221.Logic
 {
-    public class CarLogic : Repository<Car>, ICarRepository
+    public class CarLogic : ICarLogic
     {
-        public CarLogic(DbContext dbc) : base(dbc)
+        ICarRepository carRepo;
+        ICarStoreRepository carStoreRepo;
+        IRentingRepository rentingRepo;
+        public CarLogic(ICarRepository carRepo)
         {
-
+            this.carRepo = carRepo;
         }
-        //Create
-        public override void Insert(Car entity)
+        public void Insert(Car car)
         {
-            this.dbc.Set<Car>().Add(entity);
-        }
-
-        //Read
-        public override Car GetOne(int id)
-        {
-            return GetAll().SingleOrDefault(x => x.CarID == id);
+            carRepo.Insert(car);
         }
 
-        //Update
-        public void ChangeInfor(int id, string newName)
+        public IEnumerable<Car> GetAll()
         {
-            var item = GetOne(id);
-            item.CarName = newName;
-            dbc.SaveChanges();
+            return carRepo.GetAll();
         }
 
-        //Delete
-        public override void Remove(int id)
+        public Car Read(int id)
         {
-            Car car = this.GetOne(id);
-            this.Dbc.Set<Car>().Remove(car);
-            this.Dbc.SaveChanges();
+            return carRepo.Read(id);
         }
-        public IEnumerable<int> GetIdPeopleRentingCar()
+
+        public void Remove(int id)
         {
-            List<int> list = new List<int>();
-
-
-
-            //foreach (var item in c)
-            //{
-            //    if()
-            //    Console.WriteLine(item);
-            //    list.Add(item);
-            //}
-
-            return list;
-
+            carRepo.Remove(id);
         }
-        public IEnumerable<int> GetNumberOfAvailbleRentingCar()
+
+        public void Update(Car students)
+        {
+            carRepo.Update(students);
+        }
+        public IQueryable<Car> ReadAll()
+        {
+            return carRepo.ReadAll();
+        }
+        public IEnumerable<int> GetHighLevelCar()
         {
             List<int> list = new List<int>();
 
+            var car = from p in carRepo.ReadAll()
+                      where p.SellingPrice>80000
+                      select p.CarID;
 
-
-            //foreach (var item in c)
-            //{
-            //    if()
-            //    Console.WriteLine(item);
-            //    list.Add(item);
-            //}
-
+            foreach (var item in car)
+            {
+                list.Add(item);
+            }
             return list;
-
         }
-        public IEnumerable<string> GetNameOfCar()
+        public IEnumerable<int> GetNormalLevelCar()
+        {
+            List<int> list = new List<int>();
+
+            var car = from p in carRepo.ReadAll()
+                      where p.SellingPrice > 30000 && p.SellingPrice < 80000
+                      select p.CarID;
+
+            foreach (var item in car)
+            {
+                list.Add(item);
+            }
+            return list;
+        }
+        public IEnumerable<int> GetLowLevelCar()
+        {
+            List<int> list = new List<int>();
+
+            var car = from p in carRepo.ReadAll()
+                      where p.SellingPrice < 30000
+                      select p.CarID;
+
+            foreach (var item in car)
+            {
+                list.Add(item);
+            }
+            return list;
+        }
+        public IEnumerable<string> GetCategoryInCarStore()
         {
             List<string> list = new List<string>();
 
+            var car = from x in carRepo.ReadAll()
+                      join y in carStoreRepo.ReadAll()
+                      on x.CarStoreID equals y.CarStoreID
+                      select y.Category;
 
-
-            //foreach (var item in c)
-            //{
-            //    if()
-            //    Console.WriteLine(item);
-            //    list.Add(item);
-            //}
-
+            foreach (var item in car)
+            {
+                list.Add(item);
+            }
             return list;
-
         }
-        public IEnumerable<int> GetIdPeopleRentingCarLater()
+        public IEnumerable<int> GetAmountOfRenting()
         {
             List<int> list = new List<int>();
 
+            var car = from x in carRepo.ReadAll()
+                      join y in rentingRepo.ReadAll()
+                      on x.CarID equals y.CarID
+                      select y.Amount;
 
-
-            //foreach (var item in c)
-            //{
-            //    if()
-            //    Console.WriteLine(item);
-            //    list.Add(item);
-            //}
-
+            foreach (var item in car)
+            {
+                list.Add(item);
+            }
             return list;
-
         }
-        public IEnumerable<int> GetIdPeopleBooking()
-        {
-            List<int> list = new List<int>();
 
 
-
-            //foreach (var item in c)
-            //{
-            //    if()
-            //    Console.WriteLine(item);
-            //    list.Add(item);
-            //}
-
-            return list;
-
-        }
     }
 }

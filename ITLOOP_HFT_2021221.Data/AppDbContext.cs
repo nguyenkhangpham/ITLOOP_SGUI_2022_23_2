@@ -50,23 +50,23 @@ namespace ITLOOP_HFT_2021221.Data
                     .HasForeignKey(renting => renting.CarID)
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
-            CarStore cs0 = new CarStore() { CarStoreID = 1, Category = "Electric", Infor = "Rental Electric car", ViewCount = 275 };
-            CarStore cs1 = new CarStore() { CarStoreID = 2, Category = "Gasoline", Infor = "Rental Gasoline car", ViewCount = 123 };
-            CarStore cs2 = new CarStore() { CarStoreID = 3, Category = "Sport", Infor = "Rental Sport car", ViewCount = 750 };
-            CarStore cs3 = new CarStore() { CarStoreID = 4, Category = "Festival", Infor = "Rental Festival car", ViewCount = 100 };
-            CarStore cs4 = new CarStore() { CarStoreID = 5, Category = "Supercar", Infor = "Rental Supercar", ViewCount = 30 };
+            CarStore cs0 = new CarStore() { CarStoreID = 1, Category = "Electric", Infor = "Rental Electric car"};
+            CarStore cs1 = new CarStore() { CarStoreID = 2, Category = "Gasoline", Infor = "Rental Gasoline car" };
+            CarStore cs2 = new CarStore() { CarStoreID = 3, Category = "Sport", Infor = "Rental Sport car"};
+            CarStore cs3 = new CarStore() { CarStoreID = 4, Category = "Festival", Infor = "Rental Festival car"};
+            CarStore cs4 = new CarStore() { CarStoreID = 5, Category = "Supercar", Infor = "Rental Supercar"};
             //CarStore cs5 = new CarStore() { CarStoreID = 6, Category = "Touring Car", Title = "Rental Touring car", ViewCount = 1130 };
 
-            Car c0 = new Car() { CarID = 1, CarName = "Lamborgini" };
-            Car c1 = new Car() { CarID = 1, CarName = "Honda" };
-            Car c2 = new Car() { CarID = 1, CarName = "Hyundai" };
-            Car c3 = new Car() { CarID = 1, CarName = "Ferrari" };
-            Car c4 = new Car() { CarID = 1, CarName = "Roll-Royce" };
-            Car c5 = new Car() { CarID = 1, CarName = "Tesla" };
-            Car c6 = new Car() { CarID = 1, CarName = "Porche" };
-            Car c7 = new Car() { CarID = 1, CarName = "Ford" };
-            Car c8 = new Car() { CarID = 1, CarName = "BMW" };
-            Car c9 = new Car() { CarID = 1, CarName = "Audi" };
+            Car c0 = new Car() { CarID = 1, CarName = "Lamborgini", SellingPrice = 100000 };
+            Car c1 = new Car() { CarID = 1, CarName = "Honda", SellingPrice = 5000 };
+            Car c2 = new Car() { CarID = 1, CarName = "Hyundai", SellingPrice = 27300 };
+            Car c3 = new Car() { CarID = 1, CarName = "Ferrari", SellingPrice =65500 };
+            Car c4 = new Car() { CarID = 1, CarName = "Roll-Royce", SellingPrice = 50000 };
+            Car c5 = new Car() { CarID = 1, CarName = "Tesla", SellingPrice = 76400 };
+            Car c6 = new Car() { CarID = 1, CarName = "Porche", SellingPrice = 45000 };
+            Car c7 = new Car() { CarID = 1, CarName = "Ford", SellingPrice = 32000 };
+            Car c8 = new Car() { CarID = 1, CarName = "BMW", SellingPrice = 98000 };
+            Car c9 = new Car() { CarID = 1, CarName = "Audi", SellingPrice = 85000 };
             //Car c10 = new Car() { CarID = 1, CarName = "Chevrolet" };
 
             Renting r0 = new Renting() { RentID = 1, RenterName = "Stan Smith", Amount = 350 };

@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ITLOOP_HFT_2021221.Models\ITLOOP_HFT_2021221.Models.csproj" />
     <ProjectReference Include="..\ITLOOP_HFT_2021221.Repository\ITLOOP_HFT_2021221.Repository.csproj" />
   </ItemGroup>

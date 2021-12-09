@@ -1,4 +1,3 @@
-using ITLOOP_HFT_2021221.Endpoint.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -18,7 +17,11 @@ namespace ITLOOP_HFT_2021221.Endpoint
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddTransient<CarService>();
+            //services.AddTransient<ICarLogic, CarLogic>();
+            //services.AddTransient<IBrandLogic, BrandLogic>();
+            //services.AddTransient<ICarRepository, CarRepository>();
+            //services.AddTransient<IBrandRepository, BrandRepository>();
+            //services.AddTransient<CarDbContext, CarDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

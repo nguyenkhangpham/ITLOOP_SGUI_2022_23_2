@@ -9,128 +9,115 @@ using System.Threading.Tasks;
 
 namespace ITLOOP_HFT_2021221.Logic
 {
-    public class CarStoreLogic : Logic, ICarStoreLogic
+    public class CarStoreLogic : ICarStoreLogic
     {
-        CarStoreLogic carStore;
-        Car car;
-        Renting renting;
-        public CarStoreLogic(DbContext dbc) 
+        ICarRepository carRepo;
+        ICarStoreRepository carStoreRepo;
+        IRentingRepository rentingRepo;
+
+        public CarStoreLogic(ICarStoreRepository carStoreRepo)
         {
-            this.car = car;
-            this.carStore = carStore;
-            this.renting = renting;
+            this.carStoreRepo = carStoreRepo;
         }
-        public override void Insert(CarStore entity)
+        public void Insert(CarStore car)
         {
-            this.Dbc.Set<CarStore>().Add(entity);
-        }
-        //Read
-        public override CarStore GetOne(int id)
-        {
-            return GetAll().SingleOrDefault(x => x.CarStoreID == id);
+            carStoreRepo.Insert(car);
         }
 
-        //Update
-        public void ChangeInfor(int id, string newInfor)
+        public IEnumerable<CarStore> GetAll()
         {
-            var carStore = GetOne(id);
-            carStore.Infor = newInfor;
-            dbc.SaveChanges();
+            return carStoreRepo.GetAll();
         }
 
-        public void ChangeCategory(int id, string newCategory)
+        public CarStore Read(int id)
         {
-            var carStore = GetOne(id);
-            carStore.Category = newCategory;
-            dbc.SaveChanges();
+            return carStoreRepo.Read(id);
         }
 
-        //Delete
-        public override void Remove(int id)
+        public void Remove(int id)
         {
-            CarStore cars = this.GetOne(id);
-            this.Dbc.Set<CarStore>().Remove(cars);
-            this.Dbc.SaveChanges();
+            carStoreRepo.Remove(id);
         }
-        public IEnumerable<int> GetIdPeopleRentingCar()
+
+        public void Update(CarStore students)
+        {
+            carStoreRepo.Update(students);
+        }
+        public IQueryable<CarStore> ReadAll()
+        {
+            return carStoreRepo.ReadAll();
+        }
+        public IEnumerable<int> GetCarStoreIdLessThan10()
         {
             List<int> list = new List<int>();
 
+            var car = from p in carStoreRepo.ReadAll()
+                      where p.CarStoreID < 10
+                      select p.CarStoreID;
 
-
-            //foreach (var item in c)
-            //{
-            //    if()
-            //    Console.WriteLine(item);
-            //    list.Add(item);
-            //}
-
+            foreach (var item in car)
+            {
+                list.Add(item);
+            }
             return list;
-
         }
-        public IEnumerable<int> GetNumberOfAvailbleRentingCar()
-        {
-            List<int> list = new List<int>();
-
-
-
-            //foreach (var item in c)
-            //{
-            //    if()
-            //    Console.WriteLine(item);
-            //    list.Add(item);
-            //}
-
-            return list;
-
-        }
-        public IEnumerable<string> GetNameOfCar()
+        
+            public IEnumerable<string> GetInforOfNewCarsHaveIdHigherThan100()
         {
             List<string> list = new List<string>();
 
+            var car = from p in carStoreRepo.ReadAll()
+                      where p.CarStoreID > 100
+                      select p.Infor;
 
-
-            //foreach (var item in c)
-            //{
-            //    if()
-            //    Console.WriteLine(item);
-            //    list.Add(item);
-            //}
-
+            foreach (var item in car)
+            {
+                list.Add(item);
+            }
             return list;
-
         }
-        public IEnumerable<int> GetIdPeopleRentingCarLater()
+        public IEnumerable<int> GEtCarStoreIdHigherThan20()
         {
             List<int> list = new List<int>();
 
+            var car = from p in carStoreRepo.ReadAll()
+                      where p.CarStoreID > 20
+                      select p.CarStoreID;
 
-
-            //foreach (var item in c)
-            //{
-            //    if()
-            //    Console.WriteLine(item);
-            //    list.Add(item);
-            //}
-
+            foreach (var item in car)
+            {
+                list.Add(item);
+            }
             return list;
-
         }
-        public IEnumerable<int> GetIdPeopleBooking()
+        public IEnumerable<string> GetCarNameDetail()
         {
-            List<int> list = new List<int>();
+            List<string> list = new List<string>();
 
+            var car = from x in carStoreRepo.ReadAll()
+                      join y in carRepo.ReadAll()
+                      on x.CarStoreID equals y.CarStoreID
+                      select y.CarName;
 
-
-            //foreach (var item in c)
-            //{
-            //    if()
-            //    Console.WriteLine(item);
-            //    list.Add(item);
-            //}
-
+            foreach (var item in car)
+            {
+                list.Add(item);
+            }
             return list;
+        }
+        public IEnumerable<string> GetCategoryElectricCar()
+        {
+            List<string> list = new List<string>();
 
+            var car = from x in carStoreRepo.ReadAll()
+                      where x.Category == "Electric"
+                      select x.Category;
+
+            foreach (var item in car)
+            {
+                list.Add(item);
+            }
+            return list;
         }
     }
 }
