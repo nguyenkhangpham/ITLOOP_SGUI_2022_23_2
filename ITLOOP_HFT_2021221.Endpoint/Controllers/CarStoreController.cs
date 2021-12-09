@@ -10,54 +10,66 @@ namespace ITLOOP_HFT_2021221.Endpoint.Controllers
 {
     public class CarStoreController : Controller
     {
-        ICarStoreLogic cl;
+        ICarStoreLogic csl;
 
-        public CarStoreController(ICarStoreLogic cl)
+        public CarStoreController(ICarStoreLogic csl)
         {
-            this.cl = cl;
+            this.csl = csl;
         }
 
         [HttpGet]
         public IEnumerable<CarStore> GetAll()
         {
-            return cl.ReadAll();
+            return csl.ReadAll();
         }
 
         [HttpGet("{id}")]
         public CarStore Get(int id)
         {
-            return cl.Read(id);
+            return csl.Read(id);
         }
 
         [HttpPost]
         public void Post([FromBody] CarStore value)
         {
-            cl.Insert(value);
+            csl.Insert(value);
         }
 
         [HttpPut]
         public void Put([FromBody] CarStore value)
         {
-            cl.Update(value);
+            csl.Update(value);
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            cl.Remove(id);
+            csl.Remove(id);
         }
-
-        //
-        //[HttpGet]
-        //public IEnumerable<int> GetCarStoreIdLessThan10();
-        //[HttpGet]
-        //public IEnumerable<int> GEtCarStoreIdHigherThan20();
-        //[HttpGet]
-        //public IEnumerable<string> GetInforOfNewCarsHaveIdHigherThan100();
-        //[HttpGet]
-        //public IEnumerable<string> GetCarNameDetail();
-        //[HttpGet]
-        //public IEnumerable<string> GetCategoryElectricCar();
-        //[HttpGet]
+        [HttpGet]
+        public IEnumerable<int> GetCarStoreIdLessThan10()
+        {
+            return csl.GetCarStoreIdLessThan10();
+        }
+        [HttpGet]
+        public IEnumerable<int> GEtCarStoreIdHigherThan20()
+        {
+            return csl.GEtCarStoreIdHigherThan20();
+        }
+        [HttpGet]
+        public IEnumerable<string> GetInforOfNewCarsHaveIdHigherThan100()
+        {
+            return csl.GetInforOfNewCarsHaveIdHigherThan100();
+        }
+        [HttpGet]
+        public IEnumerable<string> GetCarNameDetail()
+        {
+            return csl.GetCarNameDetail();
+        }
+        [HttpGet]
+        public IEnumerable<string> GetCategoryElectricCar()
+        {
+            return csl.GetCategoryElectricCar();
+        }
     }
 }

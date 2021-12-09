@@ -28,6 +28,7 @@ namespace ITLOOP_HFT_2021221.Logic
         public CarStore Read(int id);
         public void Update(CarStore carStore);
         public IQueryable<CarStore> ReadAll();
+        //non crud
         public IEnumerable<int> GetCarStoreIdLessThan10();
         public IEnumerable<int> GEtCarStoreIdHigherThan20();
         public IEnumerable<string> GetInforOfNewCarsHaveIdHigherThan100();
@@ -64,6 +65,7 @@ namespace ITLOOP_HFT_2021221.Logic
         public Renting Read(int id);
         public void Update(Renting car);
         public IQueryable<Renting> ReadAll();
+        //non crud
         public IEnumerable<int> GetRentAmountLessThan10000();
         public IEnumerable<int> GetRentAmountHigherThan20000();
         public IEnumerable<int> GetCarIdHasAmountLessThan10000();

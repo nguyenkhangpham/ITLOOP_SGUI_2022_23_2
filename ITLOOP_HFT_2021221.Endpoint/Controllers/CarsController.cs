@@ -49,5 +49,30 @@ namespace ITLOOP_HFT_2021221.Endpoint.Controllers
         {
             cl.Remove(id);
         }
+        [HttpGet]
+        public IEnumerable<int> GetHighLevelCar()
+        {
+            return cl.GetHighLevelCar();
+        }
+        [HttpGet]
+        public IEnumerable<int> GetNormalLevelCar()
+        {
+            return cl.GetNormalLevelCar();
+        }
+        [HttpGet]
+        public IEnumerable<int> GetLowLevelCar()
+        {
+            return cl.GetLowLevelCar();
+        }
+        [HttpGet]
+        public IEnumerable<string> GetCategoryInCarStore()
+        {
+            return cl.GetCategoryInCarStore();
+        }
+        [HttpGet]
+        public IEnumerable<int> GetAmountOfRenting()
+        {
+            return cl.GetAmountOfRenting();
+        }
     }
 }
