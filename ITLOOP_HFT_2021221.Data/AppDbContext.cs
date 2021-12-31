@@ -25,7 +25,7 @@ namespace ITLOOP_HFT_2021221.Data
             {
                 optionsBuilder
                     .UseLazyLoadingProxies()
-                    .UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=ITLOOP_HFT_2021221.Data\Database1.mdf;Integrated Security=True");
+                    .UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;MultipleActiveResultSets=true");
             }
 
         }
@@ -58,15 +58,15 @@ namespace ITLOOP_HFT_2021221.Data
             //CarStore cs5 = new CarStore() { CarStoreID = 6, Category = "Touring Car", Title = "Rental Touring car", ViewCount = 1130 };
 
             Car c0 = new Car() { CarID = 1, CarName = "Lamborgini", SellingPrice = 100000 };
-            Car c1 = new Car() { CarID = 1, CarName = "Honda", SellingPrice = 5000 };
-            Car c2 = new Car() { CarID = 1, CarName = "Hyundai", SellingPrice = 27300 };
-            Car c3 = new Car() { CarID = 1, CarName = "Ferrari", SellingPrice =65500 };
-            Car c4 = new Car() { CarID = 1, CarName = "Roll-Royce", SellingPrice = 50000 };
-            Car c5 = new Car() { CarID = 1, CarName = "Tesla", SellingPrice = 76400 };
-            Car c6 = new Car() { CarID = 1, CarName = "Porche", SellingPrice = 45000 };
-            Car c7 = new Car() { CarID = 1, CarName = "Ford", SellingPrice = 32000 };
-            Car c8 = new Car() { CarID = 1, CarName = "BMW", SellingPrice = 98000 };
-            Car c9 = new Car() { CarID = 1, CarName = "Audi", SellingPrice = 85000 };
+            Car c1 = new Car() { CarID = 2, CarName = "Honda", SellingPrice = 5000 };
+            Car c2 = new Car() { CarID = 3, CarName = "Hyundai", SellingPrice = 27300 };
+            Car c3 = new Car() { CarID = 4, CarName = "Ferrari", SellingPrice =65500 };
+            Car c4 = new Car() { CarID = 5, CarName = "Roll-Royce", SellingPrice = 50000 };
+            Car c5 = new Car() { CarID = 6, CarName = "Tesla", SellingPrice = 76400 };
+            Car c6 = new Car() { CarID = 7, CarName = "Porche", SellingPrice = 45000 };
+            Car c7 = new Car() { CarID = 8, CarName = "Ford", SellingPrice = 32000 };
+            Car c8 = new Car() { CarID = 9, CarName = "BMW", SellingPrice = 98000 };
+            Car c9 = new Car() { CarID = 10, CarName = "Audi", SellingPrice = 85000 };
             //Car c10 = new Car() { CarID = 1, CarName = "Chevrolet" };
 
             Renting r0 = new Renting() { RentID = 1, RenterName = "Stan Smith", Amount = 350 };

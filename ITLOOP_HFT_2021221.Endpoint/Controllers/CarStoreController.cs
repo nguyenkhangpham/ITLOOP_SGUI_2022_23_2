@@ -10,9 +10,9 @@ namespace ITLOOP_HFT_2021221.Endpoint.Controllers
 {
     public class CarStoreController : Controller
     {
-        ICarStoreLogic csl;
+        ICarStoreLogic<CarStore> csl;
 
-        public CarStoreController(ICarStoreLogic csl)
+        public CarStoreController(ICarStoreLogic<CarStore> csl)
         {
             this.csl = csl;
         }

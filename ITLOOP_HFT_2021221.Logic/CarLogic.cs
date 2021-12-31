@@ -9,24 +9,22 @@ using System.Threading.Tasks;
 
 namespace ITLOOP_HFT_2021221.Logic
 {
-    public class CarLogic : ICarLogic
+    public class CarLogic : ICarLogic<Car>
     {
-        ICarRepository carRepo;
-        ICarStoreRepository carStoreRepo;
-        IRentingRepository rentingRepo;
-        public CarLogic(ICarRepository carRepo)
+        private ICarRepository<Car> carRepo;
+        private ICarStoreRepository<CarStore> carStoreRepo;
+        private IRentingRepository<Renting> rentingRepo;
+        public CarLogic(ICarRepository<Car> _carRepo, ICarStoreRepository<CarStore> _carStoreRepo, IRentingRepository<Renting> _rentingRepo)
         {
-            this.carRepo = carRepo;
+            carRepo = _carRepo;
+            carStoreRepo = _carStoreRepo;
+            rentingRepo = _rentingRepo;
         }
         public void Insert(Car car)
         {
             carRepo.Insert(car);
         }
 
-        public IEnumerable<Car> GetAll()
-        {
-            return carRepo.GetAll();
-        }
 
         public Car Read(int id)
         {

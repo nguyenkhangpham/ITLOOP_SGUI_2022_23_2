@@ -10,9 +10,9 @@ namespace ITLOOP_HFT_2021221.Endpoint.Controllers
 {
     public class RentingController : Controller
     {
-        IRentingLogic rl;
+        IRentingLogic<Renting> rl;
 
-        public RentingController(IRentingLogic rl)
+        public RentingController(IRentingLogic<Renting> rl)
         {
             this.rl = rl;
         }

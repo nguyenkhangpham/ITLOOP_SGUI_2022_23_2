@@ -9,23 +9,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ITLOOP_HFT_2021221.Logic
 {
-    public class RentingLogic : IRentingLogic
+    public class RentingLogic : IRentingLogic<Renting>
     {
-        ICarRepository carRepo;
-        ICarStoreRepository carStoreRepo;
-        IRentingRepository rentingRepo;
-        public RentingLogic(IRentingRepository rentingRepo)
+        private ICarRepository<Car> carRepo;
+        private ICarStoreRepository<CarStore> carStoreRepo;
+        private IRentingRepository<Renting> rentingRepo;
+        public RentingLogic(ICarRepository<Car> _carRepo, ICarStoreRepository<CarStore> _carStoreRepo, IRentingRepository<Renting> _rentingRepo)
         {
-            this.rentingRepo = rentingRepo;
+            carRepo = _carRepo;
+            carStoreRepo = _carStoreRepo;
+            rentingRepo = _rentingRepo;
         }
         public void Insert(Renting car)
         {
             rentingRepo.Insert(car);
-        }
-
-        public IEnumerable<Renting> GetAll()
-        {
-            return rentingRepo.GetAll();
         }
 
         public Renting Read(int id)

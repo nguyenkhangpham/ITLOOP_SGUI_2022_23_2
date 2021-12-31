@@ -10,15 +10,15 @@ using ITLOOP_HFT_2021221.Data;
 
 namespace ITLOOP_HFT_2021221.Repository
 {
-    public class RentingRepository : Repository<Renting>, IRentingRepository
+    public class RentingRepository : IRentingRepository<Renting>
     {
         AppDbContext dbc;
-        public RentingRepository(AppDbContext dbc):base(dbc)
+        public RentingRepository(AppDbContext _dbc)
         {
-            this.dbc = dbc;
+            this.dbc = _dbc;
         }
         //Create
-        public override void Insert(Renting entity)
+        public  void Insert(Renting entity)
         {
             this.dbc.Set<Renting>().Add(entity);
         }
@@ -28,10 +28,6 @@ namespace ITLOOP_HFT_2021221.Repository
         {
             return
                 dbc.Set<Renting>().FirstOrDefault(t => t.RentID == id);
-        }
-        public override Renting GetOne(int id)
-        {
-            return GetAll().SingleOrDefault(x => x.RentID == id);
         }
 
         //Update
@@ -44,26 +40,13 @@ namespace ITLOOP_HFT_2021221.Repository
             carToUpdate.Car = car.Car;
             dbc.SaveChanges();
         }
-        //public void ChangeAmount(int id, int newAmount)
-        //{
-        //    var rent = GetOne(id);
-        //    rent.Amount = newAmount;
-        //    dbc.SaveChanges();
-        //}
-
-        //public void ChangeBidderName(int id, string NewName)
-        //{
-        //    var rent = GetOne(id);
-        //    rent.RenterName = NewName;
-        //    dbc.SaveChanges();
-        //}
 
         //Delete
-        public override void Remove(int id)
+        public void Remove(int id)
         {
-            Renting rent = this.GetOne(id);
-            this.Dbc.Set<Renting>().Remove(rent);
-            this.Dbc.SaveChanges();
+            var toDelete = Read(id);
+            dbc.Remove(toDelete);
+            dbc.SaveChanges();
         }
 
         public IQueryable<Renting> ReadAll()

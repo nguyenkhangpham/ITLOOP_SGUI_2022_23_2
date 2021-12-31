@@ -13,9 +13,9 @@ namespace ITLOOP_HFT_2021221.Endpoint.Controllers
     [ApiController]
     public class CarsController : ControllerBase
     {
-        ICarLogic cl;
+        ICarLogic<Car> cl;
 
-        public CarsController(ICarLogic cl)
+        public CarsController(ICarLogic<Car> cl)
         {
             this.cl = cl;
         }

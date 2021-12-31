@@ -9,22 +9,18 @@ using ITLOOP_HFT_2021221.Data;
 
 namespace ITLOOP_HFT_2021221.Repository
 {
-    public class CarStoreRepository : Repository<CarStore>, ICarStoreRepository
+    public class CarStoreRepository : ICarStoreRepository<CarStore>
     {
         AppDbContext dbc;
-        public CarStoreRepository(AppDbContext dbc) : base(dbc)
+        public CarStoreRepository(AppDbContext _dbc) 
         {
-            this.dbc = dbc;
+            this.dbc = _dbc;
         }
-        public override void Insert (CarStore entity)
+        public void Insert (CarStore entity)
         {
-            this.Dbc.Set<CarStore>().Add(entity);
+            this.dbc.Set<CarStore>().Add(entity);
         }
         //Read
-        public override CarStore GetOne(int id)
-        {
-            return GetAll().SingleOrDefault(x => x.CarStoreID == id);
-        }
         public CarStore Read(int id)
         {
             return
@@ -32,24 +28,7 @@ namespace ITLOOP_HFT_2021221.Repository
         }
 
         //Update
-        public void ChangeInfor(int id, string newInfor)
-        {
-            var carStore = GetOne(id);
-            carStore.Infor = newInfor;
-            dbc.SaveChanges();
-        }
-        public void ChangeOnlyId(int id)
-        {
-            var item = GetOne(id);
-            dbc.SaveChanges();
-        }
-
-        public void ChangeCategory(int id, string newCategory)
-        {
-            var carStore = GetOne(id);
-            carStore.Category = newCategory;
-            dbc.SaveChanges();
-        }
+        
         public void Update(CarStore car)
         {
             var carToUpdate = Read(car.CarStoreID);
@@ -59,11 +38,11 @@ namespace ITLOOP_HFT_2021221.Repository
         }
 
         //Delete
-        public override void Remove(int id)
+        public  void Remove(int id)
         {
-            CarStore cars = this.GetOne(id);
-            this.Dbc.Set<CarStore>().Remove(cars);
-            this.Dbc.SaveChanges();
+            var toDelete = Read(id);
+            dbc.Remove(toDelete);
+            dbc.SaveChanges();
         }
         public IQueryable<CarStore> ReadAll()
         {

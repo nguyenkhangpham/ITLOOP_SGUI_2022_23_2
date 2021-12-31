@@ -9,23 +9,21 @@ using ITLOOP_HFT_2021221.Data;
 
 namespace ITLOOP_HFT_2021221.Repository
 {
-    public class CarRepository : Repository<Car>, ICarRepository
+    public class CarRepository : ICarRepository<Car>
     {
         AppDbContext dbc;
-        public CarRepository(AppDbContext dbc): base(dbc)
+        public CarRepository(AppDbContext _dbc)
         {
-            this.dbc = dbc;
+            this.dbc = _dbc;
         }
         //Create
-        public override void Insert(Car entity)
+        public void Insert(Car entity)
         {
-            this.dbc.Set<Car>().Add(entity);
+           dbc.Set<Car>().Add(entity);
+            dbc.SaveChanges();
         }
         //Read
-        public override Car GetOne(int id)
-        {
-            return GetAll().SingleOrDefault(x => x.CarID == id);
-        }
+        
         public IQueryable<Car> ReadAll()
         {
             return dbc.Cars;
@@ -33,7 +31,7 @@ namespace ITLOOP_HFT_2021221.Repository
         public Car Read(int id)
         {
             return
-                dbc.Set<Car>().FirstOrDefault(t => t.CarID == id);
+                dbc.Set<Car>().SingleOrDefault(t => t.CarID == id);
         }
 
         //Update
@@ -58,11 +56,12 @@ namespace ITLOOP_HFT_2021221.Repository
         //}
 
         //Delete
-        public override void Remove(int id)
+        public void Remove(int id)
         {
-            Car car = this.GetOne(id);
-            this.Dbc.Set<Car>().Remove(car);
-            this.Dbc.SaveChanges();
+            var toDelete = Read(id);
+            dbc.Remove(toDelete);
+
+            dbc.SaveChanges();
         }
         
     }

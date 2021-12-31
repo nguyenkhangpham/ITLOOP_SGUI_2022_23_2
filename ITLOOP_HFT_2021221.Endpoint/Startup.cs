@@ -23,14 +23,14 @@ namespace ITLOOP_HFT_2021221.Endpoint
             services.AddControllers();
             services.AddControllers();
 
-            services.AddTransient<ICarLogic, CarLogic>();
-            services.AddTransient<ICarRepository, CarRepository>();
+            services.AddTransient<ICarLogic<Car>, CarLogic>();
+            services.AddTransient<ICarRepository<Car>, CarRepository>();
 
-            services.AddTransient<ICarStoreLogic, CarStoreLogic>();
-            services.AddTransient<ICarStoreRepository, CarStoreRepository>();
+            services.AddTransient<ICarStoreLogic<CarStore>, CarStoreLogic>();
+            services.AddTransient<ICarStoreRepository<CarStore>, CarStoreRepository>();
 
-            services.AddTransient<IRentingLogic, RentingLogic>();
-            services.AddTransient<IRentingRepository, RentingRepository>();
+            services.AddTransient<IRentingLogic<Renting>, RentingLogic>();
+            services.AddTransient<IRentingRepository<Renting>, RentingRepository>();
 
             services.AddTransient<AppDbContext, AppDbContext>();
         }
@@ -47,10 +47,6 @@ namespace ITLOOP_HFT_2021221.Endpoint
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
                 endpoints.MapControllers();
             });
         }
