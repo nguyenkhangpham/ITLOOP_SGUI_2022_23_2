@@ -59,19 +59,19 @@ namespace ITLOOP_HFT_2021221.Test
             this.rl = new RentingLogic(mockedCarRepo.Object, mockedCarStoreRepo.Object, mockedRentingRepo.Object);
         }
 
-        [Test]
-        public void CreateNewCarTest()
-        {
-            //ARRANGE
-            Car car1 = new Car() { Id = 1, CarName = "Lamborgini", SellingPrice = 87693 };
-            Car car2 = new Car() { Id = 2, CarName = "Ferrari", SellingPrice = 35643 };
-            Car car3 = new Car() { Id = 3, CarName = "Toyota", SellingPrice = 64815 };
+        //[Test]
+        //public void CreateNewCarTest()
+        //{
+        //    //ARRANGE
+        //    Car car1 = new Car() { Id = 1, CarName = "Lamborgini", SellingPrice = 87693 };
+        //    Car car2 = new Car() { Id = 2, CarName = "Ferrari", SellingPrice = 35643 };
+        //    Car car3 = new Car() { Id = 3, CarName = "Toyota", SellingPrice = 64815 };
 
-            //ACT-ASSERT
-            Assert.That(() => cl.InsertCar(car1), Throws.Nothing);
-            Assert.That(() => cl.InsertCar(car2), Throws.InnerException);
-            Assert.That(() => cl.InsertCar(car3), Throws.InnerException);
-        }
+        //    //ACT-ASSERT
+        //    Assert.That(() => cl.InsertCar(car1), Throws.Nothing);
+        //    Assert.That(() => cl.InsertCar(car2), Throws.InnerException);
+        //    Assert.That(() => cl.InsertCar(car3), Throws.InnerException);
+        //}
         [TestCase(1, "Ferrari", 81241)]
         [TestCase(5, "Audi", 15350)]
         [TestCase(2, "Honda", 25000)]
@@ -102,70 +102,70 @@ namespace ITLOOP_HFT_2021221.Test
             Assert.That(() => rl.Insert(car), Throws.Nothing);
         }
 
-        [Test]
-        public void GetInforOfNewCarsHaveIdHigherThan100Test()
-        {
-            //ACT
-            var result = csl.GetInforOfNewCarsHaveIdHigherThan100();
+        //[Test]
+        //public void GetInforOfNewCarsHaveIdHigherThan100Test()
+        //{
+        //    //ACT
+        //    var result = csl.GetInforOfNewCarsHaveIdHigherThan100();
 
-            //ASSERT
-            var list = new List
-                <KeyValuePair<string, int>>()
-            {
-                new KeyValuePair<string, int>
-                ("Rental Electric car", 50)
-            };
-            Assert.That(result, Is.EqualTo(list));
-        }
-        [Test]
-        public void GEtCarStoreIdHigherThan20Test()
-        {
-            //ACT
-            var result = csl.GEtCarStoreIdHigherThan20();
+        //    //ASSERT
+        //    var list = new List
+        //        <KeyValuePair<string, int>>()
+        //    {
+        //        new KeyValuePair<string, int>
+        //        ("Rental Electric car", 50)
+        //    };
+        //    Assert.That(result, Is.EqualTo(list));
+        //}
+        //[Test]
+        //public void GEtCarStoreIdHigherThan20Test()
+        //{
+        //    //ACT
+        //    var result = csl.GEtCarStoreIdHigherThan20();
 
-            //ASSERT
-            var list = new List
-                <KeyValuePair<string, int>>()
-            {
-                new KeyValuePair<string, int>
-                ("Gasole", 10)
-            };
-            Assert.That(result, Is.EqualTo(list));
-        }
-        [Test]
-        public void GetCarStoreIdLessThan10Test()
-        {
-            //ACT
-            var result = csl.GetCarStoreIdLessThan10();
+        //    //ASSERT
+        //    var list = new List
+        //        <KeyValuePair<string, int>>()
+        //    {
+        //        new KeyValuePair<string, int>
+        //        ("Gasole", 10)
+        //    };
+        //    Assert.That(result, Is.EqualTo(list));
+        //}
+        //[Test]
+        //public void GetCarStoreIdLessThan10Test()
+        //{
+        //    //ACT
+        //    var result = csl.GetCarStoreIdLessThan10();
 
-            //ASSERT
-            var list = new List
-                <KeyValuePair<string, int>>()
-            {
-                new KeyValuePair<string, int>
-                ("Electric", 1)
-            };
-            Assert.That(result, Is.EqualTo(list));
-        }
-        [Test]
-        public void GetLowLevelCarTest()
-        {
-            //ACT
-            var result = cl.GetLowLevelCar();
+        //    //ASSERT
+        //    var list = new List
+        //        <KeyValuePair<string, int>>()
+        //    {
+        //        new KeyValuePair<string, int>
+        //        ("Electric", 1)
+        //    };
+        //    Assert.That(result, Is.EqualTo(list));
+        //}
+        //[Test]
+        //public void GetLowLevelCarTest()
+        //{
+        //    //ACT
+        //    var result = cl.GetLowLevelCar();
 
-            //ASSERT
-            Assert.That(result.SingleOrDefault, Is.EqualTo(3));
-        }
+        //    //ASSERT
+        //    Assert.That(result.SingleOrDefault, Is.EqualTo(3));
+        //}
 
-        [Test]
-        public void GetNormalLevelCarTest()
-        {
-            //ACT
-            var result = cl.GetNormalLevelCar();
+        //[Test]
+        //public void GetNormalLevelCarTest()
+        //{
+        //    //ACT
+        //    var result = cl.GetNormalLevelCar();
 
-            //ASSERT
-            Assert.That(result.SingleOrDefault, Is.EqualTo(2));
-        }
+        //    //ASSERT
+        //    Assert.That(result.SingleOrDefault, Is.EqualTo(2));
+        //}
         [Test]
         public void GetHighLevelCarTest()
         {

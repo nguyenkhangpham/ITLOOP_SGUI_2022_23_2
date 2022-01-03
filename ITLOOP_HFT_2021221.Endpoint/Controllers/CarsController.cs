@@ -35,7 +35,7 @@ namespace ITLOOP_HFT_2021221.Endpoint.Controllers
         [HttpPost]
         public void Post([FromBody] Car value)
         {
-            cl.Insert(value);
+            cl.InsertCar(value);
         }
 
         [HttpPut]
