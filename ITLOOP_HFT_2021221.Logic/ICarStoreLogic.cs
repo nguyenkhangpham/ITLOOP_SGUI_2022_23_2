@@ -14,8 +14,8 @@ namespace ITLOOP_HFT_2021221.Logic
         public void Insert(T carStore);
         public void Remove(int id);
         public T Read(int id);
-        public void Update(T carStore);
-        public IQueryable<T> ReadAll();
+        public void Update(T carStore); 
+        public IEnumerable<T> ReadAll();
         //non crud
         public IEnumerable<int> GetCarStoreIdLessThan10();
         public IEnumerable<int> GEtCarStoreIdHigherThan20();

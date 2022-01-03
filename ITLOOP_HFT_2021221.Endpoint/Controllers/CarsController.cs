@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace ITLOOP_HFT_2021221.Endpoint.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class CarsController : ControllerBase
     {
-        ICarLogic<Car> cl;
+        ICarLogic<Car> cl;  
 
         public CarsController(ICarLogic<Car> cl)
         {
@@ -49,30 +49,6 @@ namespace ITLOOP_HFT_2021221.Endpoint.Controllers
         {
             cl.Remove(id);
         }
-        [HttpGet]
-        public IEnumerable<int> GetHighLevelCar()
-        {
-            return cl.GetHighLevelCar();
-        }
-        [HttpGet]
-        public IEnumerable<int> GetNormalLevelCar()
-        {
-            return cl.GetNormalLevelCar();
-        }
-        [HttpGet]
-        public IEnumerable<int> GetLowLevelCar()
-        {
-            return cl.GetLowLevelCar();
-        }
-        [HttpGet]
-        public IEnumerable<string> GetCategoryInCarStore()
-        {
-            return cl.GetCategoryInCarStore();
-        }
-        [HttpGet]
-        public IEnumerable<int> GetAmountOfRenting()
-        {
-            return cl.GetAmountOfRenting();
-        }
+        
     }
 }

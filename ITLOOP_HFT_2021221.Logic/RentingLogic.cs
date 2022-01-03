@@ -39,7 +39,7 @@ namespace ITLOOP_HFT_2021221.Logic
         {
             rentingRepo.Update(students);
         }
-        public IQueryable<Renting> ReadAll()
+        public IEnumerable<Renting> ReadAll()
         {
             return rentingRepo.ReadAll();
         }
@@ -77,9 +77,9 @@ namespace ITLOOP_HFT_2021221.Logic
 
             var car = from x in rentingRepo.ReadAll()
                       join y in carRepo.ReadAll()
-                      on x.CarID equals y.CarID
+                      on x.CarId equals y.Id
                       where x.Amount < 10000
-                      select y.CarID;
+                      select y.Id;
 
             foreach (var item in car)
             {
@@ -93,9 +93,9 @@ namespace ITLOOP_HFT_2021221.Logic
 
             var car = from x in rentingRepo.ReadAll()
                       join y in carRepo.ReadAll()
-                      on x.CarID equals y.CarID
+                      on x.CarId equals y.Id
                       where x.Amount >20000
-                      select y.CarID;
+                      select y.Id;
 
             foreach (var item in car)
             {
@@ -109,7 +109,7 @@ namespace ITLOOP_HFT_2021221.Logic
 
             var car = from x in rentingRepo.ReadAll()
                       join y in carRepo.ReadAll()
-                      on x.CarID equals y.CarID
+                      on x.CarId equals y.Id
                       where x.Amount > 10000
                       select y.CarName;
 
@@ -118,6 +118,10 @@ namespace ITLOOP_HFT_2021221.Logic
                 list.Add(item);
             }
             return list;
+        }
+        public Renting HighestAmount()
+        {
+            return rentingRepo.ReadAll().OrderByDescending(x => x.Amount).First();
         }
     }
 }

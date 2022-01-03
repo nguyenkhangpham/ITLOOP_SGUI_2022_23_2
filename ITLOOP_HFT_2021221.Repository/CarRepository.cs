@@ -26,34 +26,22 @@ namespace ITLOOP_HFT_2021221.Repository
         
         public IQueryable<Car> ReadAll()
         {
-            return dbc.Cars;
+            return dbc.Set<Car>();
         }
         public Car Read(int id)
         {
             return
-                dbc.Set<Car>().SingleOrDefault(t => t.CarID == id);
+                dbc.Cars.SingleOrDefault(t => t.Id == id);
         }
 
         //Update
         public void Update(Car car)
         {
-            var carToUpdate = Read(car.CarID);
+            var carToUpdate = Read(car.Id);
             carToUpdate.CarName = car.CarName;
-            carToUpdate.CarStore = car.CarStore;
             carToUpdate.SellingPrice = car.SellingPrice;
             dbc.SaveChanges();
         }
-        //public void ChangeInfor(int id, string newName)
-        //{
-        //    var item = GetOne(id);
-        //    item.CarName = newName;
-        //    dbc.SaveChanges();
-        //}
-        //public void ChangeOnlyId(int id)
-        //{
-        //    var item = GetOne(id);
-        //    dbc.SaveChanges();
-        //}
 
         //Delete
         public void Remove(int id)

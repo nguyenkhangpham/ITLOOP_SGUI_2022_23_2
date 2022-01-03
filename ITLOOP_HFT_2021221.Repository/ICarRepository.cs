@@ -9,8 +9,6 @@ namespace ITLOOP_HFT_2021221.Repository
 {
     public interface ICarRepository<T> where T : class 
     {
-        //public void ChangeInfor(int id, string newInfor);
-
         public void Insert(T car);
         public void Remove(int id);
         public T Read(int id);

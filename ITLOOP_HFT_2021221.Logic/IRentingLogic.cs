@@ -12,12 +12,13 @@ namespace ITLOOP_HFT_2021221.Logic
         public void Remove(int id);
         public T Read(int id);
         public void Update(T car);
-        public IQueryable<T> ReadAll();
+        public IEnumerable<T> ReadAll(); 
         //non crud
         public IEnumerable<int> GetRentAmountLessThan10000();
         public IEnumerable<int> GetRentAmountHigherThan20000();
         public IEnumerable<int> GetCarIdHasAmountLessThan10000();
         public IEnumerable<int> GetCarIdHasAmountHigherThan20000();
         public IEnumerable<string> GetCarNameHasAmountHigherThan10000();
+        T HighestAmount();
     }
 }

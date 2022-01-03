@@ -11,8 +11,8 @@ namespace ITLOOP_HFT_2021221.Models
     [Table("CarStore")]
     public class CarStore
     {
-        [Key]
-        public int CarStoreID { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -22,13 +22,11 @@ namespace ITLOOP_HFT_2021221.Models
         public string Category { get; set; }
 
         [NotMapped]
-        public string AllData => $"[{CarStoreID}] : {Infor} : {Category} (Items: {Cars.Count()})";
-
-        public virtual ICollection<Car> Cars { get; set; }
-
-        public CarStore()
+        public virtual List<Car> Cars { get; set; }
+        public override string ToString()
         {
-            Cars = new HashSet<Car>(); //cant create instance of interface, so we make a hashset
+            string value = ($"Name:{Name} Id:{Id} Infor:{Infor} Category:{Category}");
+            return value;
         }
     }
 }

@@ -40,7 +40,7 @@ namespace ITLOOP_HFT_2021221.Logic
         {
             carStoreRepo.Update(students);
         }
-        public IQueryable<CarStore> ReadAll()
+        public IEnumerable<CarStore> ReadAll()
         {
             return carStoreRepo.ReadAll();
         }
@@ -49,8 +49,8 @@ namespace ITLOOP_HFT_2021221.Logic
             List<int> list = new List<int>();
 
             var car = from p in carStoreRepo.ReadAll()
-                      where p.CarStoreID < 10
-                      select p.CarStoreID;
+                      where p.Id < 10
+                      select p.Id;
 
             foreach (var item in car)
             {
@@ -64,7 +64,7 @@ namespace ITLOOP_HFT_2021221.Logic
             List<string> list = new List<string>();
 
             var car = from p in carStoreRepo.ReadAll()
-                      where p.CarStoreID > 100
+                      where p.Id > 100
                       select p.Infor;
 
             foreach (var item in car)
@@ -78,8 +78,8 @@ namespace ITLOOP_HFT_2021221.Logic
             List<int> list = new List<int>();
 
             var car = from p in carStoreRepo.ReadAll()
-                      where p.CarStoreID > 20
-                      select p.CarStoreID;
+                      where p.Id > 20
+                      select p.Id;
 
             foreach (var item in car)
             {
@@ -93,7 +93,7 @@ namespace ITLOOP_HFT_2021221.Logic
 
             var car = from x in carStoreRepo.ReadAll()
                       join y in carRepo.ReadAll()
-                      on x.CarStoreID equals y.CarStoreID
+                      on x.Id equals y.CarStoreID
                       select y.CarName;
 
             foreach (var item in car)

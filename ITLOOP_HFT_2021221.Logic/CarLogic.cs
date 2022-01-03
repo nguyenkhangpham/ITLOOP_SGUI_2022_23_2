@@ -40,7 +40,7 @@ namespace ITLOOP_HFT_2021221.Logic
         {
             carRepo.Update(students);
         }
-        public IQueryable<Car> ReadAll()
+        public IEnumerable<Car> ReadAll()
         {
             return carRepo.ReadAll();
         }
@@ -50,7 +50,7 @@ namespace ITLOOP_HFT_2021221.Logic
 
             var car = from p in carRepo.ReadAll()
                       where p.SellingPrice>80000
-                      select p.CarID;
+                      select p.Id;
 
             foreach (var item in car)
             {
@@ -64,7 +64,7 @@ namespace ITLOOP_HFT_2021221.Logic
 
             var car = from p in carRepo.ReadAll()
                       where p.SellingPrice > 30000 && p.SellingPrice < 80000
-                      select p.CarID;
+                      select p.Id;
 
             foreach (var item in car)
             {
@@ -78,7 +78,7 @@ namespace ITLOOP_HFT_2021221.Logic
 
             var car = from p in carRepo.ReadAll()
                       where p.SellingPrice < 30000
-                      select p.CarID;
+                      select p.Id;
 
             foreach (var item in car)
             {
@@ -92,7 +92,7 @@ namespace ITLOOP_HFT_2021221.Logic
 
             var car = from x in carRepo.ReadAll()
                       join y in carStoreRepo.ReadAll()
-                      on x.CarStoreID equals y.CarStoreID
+                      on x.CarStoreID equals y.Id
                       select y.Category;
 
             foreach (var item in car)
@@ -107,7 +107,7 @@ namespace ITLOOP_HFT_2021221.Logic
 
             var car = from x in carRepo.ReadAll()
                       join y in rentingRepo.ReadAll()
-                      on x.CarID equals y.CarID
+                      on x.Id equals y.CarId
                       select y.Amount;
 
             foreach (var item in car)
@@ -115,6 +115,10 @@ namespace ITLOOP_HFT_2021221.Logic
                 list.Add(item);
             }
             return list;
+        }
+        public IEnumerable<Car> CarWithSpecifyName(string name)
+        {
+            return carRepo.ReadAll().Where(x => x.CarName.Equals(name));
         }
 
 

@@ -46,7 +46,6 @@ namespace ITLOOP_HFT_2021221.Client
             }
             return items;
         }
-
         public T GetSingle<T>(string endpoint)
         {
             T item = default(T);
@@ -57,7 +56,17 @@ namespace ITLOOP_HFT_2021221.Client
             }
             return item;
         }
-
+        //For The lowest and highest firepower query (multi-table)
+        public T GetSingle<T>(int id, string endpoint)
+        {
+            T item = default(T);
+            HttpResponseMessage response = client.GetAsync(endpoint + "/" + id.ToString()).GetAwaiter().GetResult();
+            if (response.IsSuccessStatusCode)
+            {
+                item = response.Content.ReadAsAsync<T>().GetAwaiter().GetResult();
+            }
+            return item;
+        }
         public T Get<T>(int id, string endpoint)
         {
             T item = default(T);
@@ -68,7 +77,28 @@ namespace ITLOOP_HFT_2021221.Client
             }
             return item;
         }
-
+        //For specialiation and officer name query
+        public List<T> Get<T>(string userInput, string endpoint)
+        {
+            List<T> items = new List<T>();
+            HttpResponseMessage response = client.GetAsync(endpoint + "/" + userInput).GetAwaiter().GetResult();
+            if (response.IsSuccessStatusCode)
+            {
+                items = response.Content.ReadAsAsync<List<T>>().GetAwaiter().GetResult();
+            }
+            return items;
+        }
+        //For fought before 2005 query (multi-table)
+        public List<T> GetList<T>(int id, string endpoint)
+        {
+            List<T> items = new List<T>();
+            HttpResponseMessage response = client.GetAsync(endpoint + "/" + id).GetAwaiter().GetResult();
+            if (response.IsSuccessStatusCode)
+            {
+                items = response.Content.ReadAsAsync<List<T>>().GetAwaiter().GetResult();
+            }
+            return items;
+        }
         public void Post<T>(T item, string endpoint)
         {
             HttpResponseMessage response =
@@ -76,7 +106,6 @@ namespace ITLOOP_HFT_2021221.Client
 
             response.EnsureSuccessStatusCode();
         }
-
         public void Delete(int id, string endpoint)
         {
             HttpResponseMessage response =
@@ -84,12 +113,10 @@ namespace ITLOOP_HFT_2021221.Client
 
             response.EnsureSuccessStatusCode();
         }
-
         public void Put<T>(T item, string endpoint)
         {
             HttpResponseMessage response =
                 client.PutAsJsonAsync(endpoint, item).GetAwaiter().GetResult();
-
 
             response.EnsureSuccessStatusCode();
         }

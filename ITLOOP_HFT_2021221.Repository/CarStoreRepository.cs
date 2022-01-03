@@ -18,20 +18,22 @@ namespace ITLOOP_HFT_2021221.Repository
         }
         public void Insert (CarStore entity)
         {
-            this.dbc.Set<CarStore>().Add(entity);
+            dbc.Set<CarStore>().Add(entity);
+            dbc.SaveChanges();
         }
         //Read
         public CarStore Read(int id)
         {
             return
-                dbc.Set<CarStore>().FirstOrDefault(t => t.CarStoreID == id);
+                dbc.CarStores.SingleOrDefault(t => t.Id == id);
         }
 
         //Update
         
         public void Update(CarStore car)
         {
-            var carToUpdate = Read(car.CarStoreID);
+            var carToUpdate = Read(car.Id);
+            carToUpdate.Name = car.Name;
             carToUpdate.Infor = car.Infor;
             carToUpdate.Category = car.Category;
             dbc.SaveChanges();
@@ -46,7 +48,7 @@ namespace ITLOOP_HFT_2021221.Repository
         }
         public IQueryable<CarStore> ReadAll()
         {
-            return dbc.CarStores;
+            return dbc.Set<CarStore>();
         }
     }
 }

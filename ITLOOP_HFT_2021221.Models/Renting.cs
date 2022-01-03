@@ -11,19 +11,20 @@ namespace ITLOOP_HFT_2021221.Models
     [Table("Renting")]
     public class Renting
     {
-        [Key]
-        public int RentID { get; set; }
+        public int Id { get; set; }
+        public int? CarId { get; set; }
 
         [MaxLength(30)]
         public string RenterName { get; set; }
 
         public int Amount { get; set; }
-
-        [NotMapped]
         public virtual Car Car { get; set; }
 
-        [ForeignKey(nameof(Car))]
-        public int CarID { get; set; }
+        public override string ToString()
+        {
+            string value = ($"Name:{RenterName} Id:{Id} in car:{CarId} Amount:{Amount}");
+            return value;
+        }
 
     }
 }

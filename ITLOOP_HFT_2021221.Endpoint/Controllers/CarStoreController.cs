@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace ITLOOP_HFT_2021221.Endpoint.Controllers
 {
-    public class CarStoreController : Controller
+    [Route("[controller]")]
+    [ApiController]
+    public class CarStoreController : ControllerBase
     {
         ICarStoreLogic<CarStore> csl;
 
@@ -46,30 +48,6 @@ namespace ITLOOP_HFT_2021221.Endpoint.Controllers
         {
             csl.Remove(id);
         }
-        [HttpGet]
-        public IEnumerable<int> GetCarStoreIdLessThan10()
-        {
-            return csl.GetCarStoreIdLessThan10();
-        }
-        [HttpGet]
-        public IEnumerable<int> GEtCarStoreIdHigherThan20()
-        {
-            return csl.GEtCarStoreIdHigherThan20();
-        }
-        [HttpGet]
-        public IEnumerable<string> GetInforOfNewCarsHaveIdHigherThan100()
-        {
-            return csl.GetInforOfNewCarsHaveIdHigherThan100();
-        }
-        [HttpGet]
-        public IEnumerable<string> GetCarNameDetail()
-        {
-            return csl.GetCarNameDetail();
-        }
-        [HttpGet]
-        public IEnumerable<string> GetCategoryElectricCar()
-        {
-            return csl.GetCategoryElectricCar();
-        }
+        
     }
 }

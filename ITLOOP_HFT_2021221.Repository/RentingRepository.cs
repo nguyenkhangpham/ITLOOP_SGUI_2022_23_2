@@ -20,24 +20,24 @@ namespace ITLOOP_HFT_2021221.Repository
         //Create
         public  void Insert(Renting entity)
         {
-            this.dbc.Set<Renting>().Add(entity);
+            dbc.Set<Renting>().Add(entity);
+            dbc.SaveChanges();
         }
 
         //Read
         public Renting Read(int id)
         {
             return
-                dbc.Set<Renting>().FirstOrDefault(t => t.RentID == id);
+                dbc.Rentings.SingleOrDefault(t => t.Id == id);
         }
 
         //Update
         public void Update(Renting car)
         {
-            var carToUpdate = Read(car.RentID);
+            var carToUpdate = Read(car.Id);
+            carToUpdate.CarId = car.CarId;
             carToUpdate.RenterName = car.RenterName;
             carToUpdate.Amount = car.Amount;
-            carToUpdate.CarID = car.CarID;
-            carToUpdate.Car = car.Car;
             dbc.SaveChanges();
         }
 
@@ -51,7 +51,7 @@ namespace ITLOOP_HFT_2021221.Repository
 
         public IQueryable<Renting> ReadAll()
         {
-            return dbc.Rentings;
+            return dbc.Set<Renting>();
         }
     }
 }

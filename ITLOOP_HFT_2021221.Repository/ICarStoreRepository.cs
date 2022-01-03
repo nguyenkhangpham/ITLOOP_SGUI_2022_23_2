@@ -9,9 +9,6 @@ namespace ITLOOP_HFT_2021221.Repository
 {
     public interface ICarStoreRepository<T> where T : class
     {
-        //public void ChangeInfor(int id, string newInfor);
-        //public void ChangeCategory(int id, string newCategory);
-
         public void Insert(CarStore carStore);
         public void Remove(int id);
         public CarStore Read(int id);

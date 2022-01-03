@@ -31,21 +31,21 @@ namespace ITLOOP_HFT_2021221.Test
             mockedCarRepo.Setup(x => x.Read(It.IsAny<int>())).Returns(
                 new Car()
                 {
-                    CarID = 1,
+                    Id = 1,
                     CarName = "Ferrari",
                     SellingPrice = 55000
                 });
             mockedCarStoreRepo.Setup(x => x.Read(It.IsAny<int>())).Returns(
                 new CarStore() //CarStoreID = 1, Category = "Electric", Infor = "Rental Electric car"
                 {
-                    CarStoreID = 3,
+                    Id = 3,
                     Category = "Electric",
                     Infor = "Rental Electric car"
                 });
             mockedRentingRepo.Setup(x => x.Read(It.IsAny<int>())).Returns(
                 new Renting() // RentID = 12, RenterName = "Mark Flynn", Amount = 1535
                 {
-                    RentID = 12,
+                    Id = 12,
                     RenterName = "Mark Flynn",
                     Amount = 1535
                 });
@@ -59,57 +59,27 @@ namespace ITLOOP_HFT_2021221.Test
             this.rl = new RentingLogic(mockedCarRepo.Object, mockedCarStoreRepo.Object, mockedRentingRepo.Object);
         }
 
-        [SetUp]
-        public void SetUp()
-        {
-            var contextBuilder = new DbContextOptionsBuilder<AppDbContext>();
-
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True";
-
-            contextBuilder.UseSqlServer(connectionString);
-
-            Context = new AppDbContext(contextBuilder.Options);
-
-
-        }
-
         //[SetUp]
-        //public void Init()
+        //public void SetUp()
         //{
-        //    var mockCarRepository =
-        //        new Mock<ICarRepository>();
+        //    var contextBuilder = new DbContextOptionsBuilder<AppDbContext>();
 
-        //    CarStore carStore = new CarStore();
-        //    carStore.CarStoreID = 1;
-        //    carStore.Infor = "Electric";
-        //    carStore.Category = "Rental Electric car";
-        //    var cars = new List<Car>()
-        //        {
-        //            new Car(){
-        //                CarID = 1,
-        //                CarName = "Ferrari",
-        //                SellingPrice = 55000
-        //            },
-        //            new Car(){
-        //                CarID = 2,
-        //                CarName = "Audi",
-        //                SellingPrice = 85000
-        //            }
-        //        };
+        //    string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True";
 
-        //    mockCarRepository.Setup((t) => t.GetAll())
-        //        .Returns((IQueryable<Car>)cars);
+        //    contextBuilder.UseSqlServer(connectionString);
 
-        //    cl = new CarLogic(
-        //        mockCarRepository.Object);
+        //    Context = new AppDbContext(contextBuilder.Options);
+
+
         //}
+
         [Test]
         public void CreateNewCarTest()
         {
             //ARRANGE
-            Car car1 = new Car() { CarID = 1, CarName = "Lamborgini", SellingPrice = 87693 };
-            Car car2 = new Car() { CarID = 2, CarName = "Ferrari", SellingPrice = 35643 };
-            Car car3 = new Car() { CarID = 3, CarName = "Toyota", SellingPrice = 64815 };
+            Car car1 = new Car() { Id = 1, CarName = "Lamborgini", SellingPrice = 87693 };
+            Car car2 = new Car() { Id = 2, CarName = "Ferrari", SellingPrice = 35643 };
+            Car car3 = new Car() { Id = 3, CarName = "Toyota", SellingPrice = 64815 };
 
             ICarRepository<Car> repository = new CarRepository(Context);
 
@@ -118,36 +88,36 @@ namespace ITLOOP_HFT_2021221.Test
             Assert.That(() => repository.Insert(car2), Throws.InnerException);
             Assert.That(() => repository.Insert(car3), Throws.InnerException);
         }
-        [Test]
-        public void CreateNewCarStoreTest()
+        [TestCase(1, "Ferrari", 81241)]
+        [TestCase(5, "Audi", 15350)]
+        [TestCase(2, "Honda", 25000)]
+        public void CreateCar_DoesNotThrowException(int id, string name, int price)
         {
-            //ARRANGE
-            CarStore car1 = new CarStore() { CarStoreID = 1, Category = "Electric", Infor = "Rental Electric car" };
-            CarStore car2 = new CarStore() { CarStoreID = 2, Category = "Gasoline", Infor = "Rental Gasoline car" };
-            CarStore car3 = new CarStore() { CarStoreID = 3, Category = "Sport", Infor = "Rental Sport car" };
-
-            ICarStoreRepository<CarStore> repository = new CarStoreRepository(Context);
-
-            //ACT-ASSERT
-            Assert.That(() => repository.Insert(car1), Throws.Nothing);
-            Assert.That(() => repository.Insert(car2), Throws.InnerException);
-            Assert.That(() => repository.Insert(car3), Throws.InnerException);
+            Car car = new Car()
+            { Id = id, CarName = name, SellingPrice = price };
+            Assert.That(() => cl.Insert(car), Throws.Nothing);
         }
-        [Test]
-        public void CreateNewRentingTest()
+
+        [TestCase(1, "Electric", "Rental Electric car")]
+        [TestCase(5, "Gasoline", "Rental Gasoline car")]
+        [TestCase(2, "Sport", "Rental Sport car")]
+        public void CreateCarStore_DoesNotThrowException(int id, string cate, string infor)
         {
-            //ARRANGE
-            Renting r1 = new Renting() { RentID = 2, RenterName = "John Barnaby", Amount = 1220 };
-            Renting r2 = new Renting() { RentID = 3, RenterName = "Annette Batchelor", Amount = 120 };
-            Renting r3 = new Renting() { RentID = 4, RenterName = "Bill Bradbury", Amount = 2600 };
-
-            IRentingRepository<Renting> repository = new RentingRepository(Context);
-
-            //ACT-ASSERT
-            Assert.That(() => repository.Insert(r1), Throws.Nothing);
-            Assert.That(() => repository.Insert(r2), Throws.InnerException);
-            Assert.That(() => repository.Insert(r3), Throws.InnerException);
+            CarStore car = new CarStore()
+            { Id = id, Category = cate, Infor = infor };
+            Assert.That(() => csl.Insert(car), Throws.Nothing);
         }
+
+        [TestCase(1, "Electric", 34554)]
+        [TestCase(5, "Gasoline", 25837)]
+        [TestCase(2, "Sport", 73873)]
+        public void CreateRenting_DoesNotThrowException(int id, string name, int amount)
+        {
+            Renting car = new Renting()
+            { Id = id, RenterName = name, Amount = amount };
+            Assert.That(() => rl.Insert(car), Throws.Nothing);
+        }
+
         [Test]
         public void GetInforOfNewCarsHaveIdHigherThan100Test()
         {
@@ -167,7 +137,7 @@ namespace ITLOOP_HFT_2021221.Test
         public void GEtCarStoreIdHigherThan20Test()
         {
             //ACT
-            var result = csl.GetCarStoreIdLessThan10();
+            var result = csl.GEtCarStoreIdHigherThan20();
 
             //ASSERT
             var list = new List
@@ -208,11 +178,6 @@ namespace ITLOOP_HFT_2021221.Test
             };
             Assert.That(result, Is.EqualTo(list));
         }
-        /*
-         public IEnumerable<int> GetCarStoreIdLessThan10();
-        public IEnumerable<int> GEtCarStoreIdHigherThan20();
-        public IEnumerable<string> GetInforOfNewCarsHaveIdHigherThan100();
-        */
 
         [Test]
         public void GetNormalLevelCarTest()
@@ -245,35 +210,26 @@ namespace ITLOOP_HFT_2021221.Test
             Assert.That(result, Is.EqualTo(list));
         }
         [Test]
-        public void Remove_ASubstring_RemovesThatSubstring()
+        public void HighestAmountTest()
         {
-            string str = "Hello, world!";
-
-            string transformed = str.Remove(1);
-
-            var position = str.IndexOf("Hello");
-            var expected = str.Substring(position + 5);
-            Assert.AreEqual(expected, transformed);
+            var item = this.rl.HighestAmount();
+            Assert.That(item.Amount, Is.EqualTo(2600));
         }
         [Test]
-        public void Adding_4_And_3_Should_Return_7()
+        public void CarByName()
         {
-            var calculator = new CarStore() { CarStoreID = 1, Category = "Electric", Infor = "Rental Electric car"};
-
-            int result = calculator.CarStoreID;
-
-            Assert.AreEqual(7, result);
+            var carItem = this.cl.CarWithSpecifyName("ferrari");
+            foreach (var obj in carItem)
+            {
+                Assert.That(obj.CarName == "ferrari");
+            }
         }
-
-        Renting r0 = new Renting() { RentID = 1, RenterName = "Stan Smith", Amount = 350 };
-        Renting r1 = new Renting() { RentID = 2, RenterName = "John Barnaby", Amount = 1220 };
-        Renting r2 = new Renting() { RentID = 3, RenterName = "Annette Batchelor", Amount = 120 };
 
         private IQueryable<Car> FakeCarObjects()
         {
-            Car car1 = new Car { CarID = 1, CarName = "Lamborgini", SellingPrice = 100000 };
-            Car car2 = new Car { CarID = 2, CarName = "Honda", SellingPrice = 5000 };
-            Car car3 = new Car { CarID = 3, CarName = "Hyundai", SellingPrice = 27300 };
+            Car car1 = new Car { Id = 1, CarName = "Lamborgini", SellingPrice = 100000 };
+            Car car2 = new Car { Id = 2, CarName = "Honda", SellingPrice = 5000 };
+            Car car3 = new Car { Id = 3, CarName = "Hyundai", SellingPrice = 27300 };
 
             List<Car> carList = new List<Car>();
 
@@ -286,9 +242,9 @@ namespace ITLOOP_HFT_2021221.Test
 
         private IQueryable<CarStore> FakeCarStoreObjects()
         {
-            CarStore car1 = new CarStore { CarStoreID = 1, Category = "Electric", Infor = "Rental Electric car" };
-            CarStore car2 = new CarStore { CarStoreID = 2, Category = "Gasoline", Infor = "Rental Gasoline car" };
-            CarStore car3 = new CarStore { CarStoreID = 3, Category = "Sport", Infor = "Rental Sport car" };
+            CarStore car1 = new CarStore { Id = 1, Category = "Electric", Infor = "Rental Electric car" };
+            CarStore car2 = new CarStore { Id = 2, Category = "Gasoline", Infor = "Rental Gasoline car" };
+            CarStore car3 = new CarStore { Id = 3, Category = "Sport", Infor = "Rental Sport car" };
 
             List<CarStore> carStoreList = new List<CarStore>();
 
@@ -300,9 +256,9 @@ namespace ITLOOP_HFT_2021221.Test
         }
         private IQueryable<Renting> FakeRentingObjects()
         {
-            Renting car1 = new Renting { RentID = 1, RenterName = "Stan Smith", Amount = 350 };
-            Renting car2 = new Renting { RentID = 2, RenterName = "John Barnaby", Amount = 1220 };
-            Renting car3 = new Renting { RentID = 3, RenterName = "Annette Batchelor", Amount = 120 };
+            Renting car1 = new Renting { Id = 1, RenterName = "Stan Smith", Amount = 350 };
+            Renting car2 = new Renting { Id = 2, RenterName = "John Barnaby", Amount = 1220 };
+            Renting car3 = new Renting { Id = 3, RenterName = "Annette Batchelor", Amount = 120 };
 
             List<Renting> rentingList = new List<Renting>();
 

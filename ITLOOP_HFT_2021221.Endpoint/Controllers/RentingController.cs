@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace ITLOOP_HFT_2021221.Endpoint.Controllers
 {
-    public class RentingController : Controller
+    [Route("[controller]")]
+    [ApiController]
+    public class RentingController : ControllerBase
     {
         IRentingLogic<Renting> rl;
 
@@ -46,30 +48,6 @@ namespace ITLOOP_HFT_2021221.Endpoint.Controllers
         {
             rl.Remove(id);
         }
-        [HttpGet]
-        public IEnumerable<int> GetRentAmountLessThan10000()
-        {
-            return rl.GetRentAmountLessThan10000();
-        }
-        [HttpGet]
-        public IEnumerable<int> GetRentAmountHigherThan20000()
-        {
-            return rl.GetRentAmountHigherThan20000();
-        }
-        [HttpGet]
-        public IEnumerable<int> GetCarIdHasAmountLessThan10000()
-        {
-            return rl.GetCarIdHasAmountLessThan10000();
-        }
-        [HttpGet]
-        public IEnumerable<int> GetCarIdHasAmountHigherThan20000()
-        {
-            return rl.GetCarIdHasAmountHigherThan20000();
-        }
-        [HttpGet]
-        public IEnumerable<string> GetCarNameHasAmountHigherThan10000()
-        {
-            return rl.GetCarNameHasAmountHigherThan10000();
-        }
+        
     }
 }

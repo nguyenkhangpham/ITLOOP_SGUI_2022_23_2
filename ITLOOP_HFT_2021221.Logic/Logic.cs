@@ -14,7 +14,6 @@ namespace ITLOOP_HFT_2021221.Logic
         CarStore carStore;
         Car car;
         Renting renting;
-
         protected Logic(CarStore carStore, Car car, Renting renting)
         {
             this.carStore = carStore;

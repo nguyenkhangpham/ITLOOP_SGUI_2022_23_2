@@ -11,8 +11,8 @@ namespace ITLOOP_HFT_2021221.Models
     [Table("Car")]
     public class Car
     {
-        [Key]
-        public int CarID { get; set; }
+        public int Id { get; set; }
+        public int? CarStoreID { get; set; }
 
         [MaxLength(50)]
         public string CarName { get; set; }
@@ -20,15 +20,11 @@ namespace ITLOOP_HFT_2021221.Models
 
         [NotMapped]
         public virtual CarStore CarStore { get; set; }
-
-        [ForeignKey(nameof(CarStore))]
-        public int CarStoreID { get; set; }
-
-        public virtual ICollection<Renting> Rentings { get; set; }  
-
-        public Car()
+        public virtual List<Renting> Rentings { get; set; }
+        public override string ToString()
         {
-            Rentings = new HashSet<Renting>();
+            string value = ($"Name:{CarName} Id: {Id} in CarStoreId:{CarStoreID} Price:{SellingPrice} ");
+            return value;
         }
     }
 }

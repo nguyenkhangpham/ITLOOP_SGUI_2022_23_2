@@ -9,8 +9,6 @@ namespace ITLOOP_HFT_2021221.Repository
 {
     public interface IRentingRepository<T> where T : class
     {
-        //public void ChangeAmount(int id, int newAmount);
-
         public void Insert(Renting renting);
         public void Remove(int id);
         public void Update(Renting renting);
