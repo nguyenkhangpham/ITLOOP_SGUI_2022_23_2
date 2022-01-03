@@ -67,7 +67,6 @@ namespace ITLOOP_HFT_2021221.Test
             Car car2 = new Car() { Id = 2, CarName = "Ferrari", SellingPrice = 35643 };
             Car car3 = new Car() { Id = 3, CarName = "Toyota", SellingPrice = 64815 };
 
-
             //ACT-ASSERT
             Assert.That(() => cl.InsertCar(car1), Throws.Nothing);
             Assert.That(() => cl.InsertCar(car2), Throws.InnerException);
@@ -155,13 +154,7 @@ namespace ITLOOP_HFT_2021221.Test
             var result = cl.GetLowLevelCar();
 
             //ASSERT
-            var list = new List
-                <KeyValuePair<string, int>>()
-            {
-                new KeyValuePair<string, int>
-                ("Toyota", 5000)
-            };
-            Assert.That(result, Is.EqualTo(list));
+            Assert.That(result.SingleOrDefault, Is.EqualTo(3));
         }
 
         [Test]
@@ -171,13 +164,7 @@ namespace ITLOOP_HFT_2021221.Test
             var result = cl.GetNormalLevelCar();
 
             //ASSERT
-            var list = new List
-                <KeyValuePair<string, int>>()
-            {
-                new KeyValuePair<string, int>
-                ("Ferrari", 25000)
-            };
-            Assert.That(result, Is.EqualTo(list));
+            Assert.That(result.SingleOrDefault, Is.EqualTo(2));
         }
         [Test]
         public void GetHighLevelCarTest()
@@ -186,13 +173,7 @@ namespace ITLOOP_HFT_2021221.Test
             var result = cl.GetHighLevelCar();
 
             //ASSERT
-            var list = new List
-                <KeyValuePair<string, int>>()
-            {
-                new KeyValuePair<string, int>
-                ("Audi", 150000)
-            };
-            Assert.That(result, Is.EqualTo(list));
+            Assert.That(result.FirstOrDefault, Is.EqualTo(1));  
         }
         [Test]
         public void HighestAmountTest()
