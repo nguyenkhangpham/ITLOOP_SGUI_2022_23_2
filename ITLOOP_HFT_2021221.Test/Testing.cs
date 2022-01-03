@@ -59,20 +59,6 @@ namespace ITLOOP_HFT_2021221.Test
             this.rl = new RentingLogic(mockedCarRepo.Object, mockedCarStoreRepo.Object, mockedRentingRepo.Object);
         }
 
-        //[SetUp]
-        //public void SetUp()
-        //{
-        //    var contextBuilder = new DbContextOptionsBuilder<AppDbContext>();
-
-        //    string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True";
-
-        //    contextBuilder.UseSqlServer(connectionString);
-
-        //    Context = new AppDbContext(contextBuilder.Options);
-
-
-        //}
-
         [Test]
         public void CreateNewCarTest()
         {

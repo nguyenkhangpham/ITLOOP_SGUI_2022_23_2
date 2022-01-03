@@ -11,7 +11,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "CarStore", 
+      "launchUrl": "Cars", 
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
