@@ -67,12 +67,11 @@ namespace ITLOOP_HFT_2021221.Test
             Car car2 = new Car() { Id = 2, CarName = "Ferrari", SellingPrice = 35643 };
             Car car3 = new Car() { Id = 3, CarName = "Toyota", SellingPrice = 64815 };
 
-            ICarRepository<Car> repository = new CarRepository(Context);
 
             //ACT-ASSERT
-            Assert.That(() => repository.Insert(car1), Throws.Nothing);
-            Assert.That(() => repository.Insert(car2), Throws.InnerException);
-            Assert.That(() => repository.Insert(car3), Throws.InnerException);
+            Assert.That(() => cl.InsertCar(car1), Throws.Nothing);
+            Assert.That(() => cl.InsertCar(car2), Throws.InnerException);
+            Assert.That(() => cl.InsertCar(car3), Throws.InnerException);
         }
         [TestCase(1, "Ferrari", 81241)]
         [TestCase(5, "Audi", 15350)]
@@ -199,7 +198,7 @@ namespace ITLOOP_HFT_2021221.Test
         public void HighestAmountTest()
         {
             var item = this.rl.HighestAmount();
-            Assert.That(item.Amount, Is.EqualTo(2600));
+            Assert.That(item.Amount, Is.EqualTo(1220));
         }
         [Test]
         public void CarByName()
