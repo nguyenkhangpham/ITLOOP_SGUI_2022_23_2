@@ -20,7 +20,7 @@ namespace ITLOOP_HFT_2021221.Logic
             carStoreRepo = _carStoreRepo;
             rentingRepo = _rentingRepo;
         }
-        public void Insert(Car car)
+        public void InsertCar(Car car)
         {
             carRepo.Insert(car);
         }
@@ -40,7 +40,7 @@ namespace ITLOOP_HFT_2021221.Logic
         {
             carRepo.Update(students);
         }
-        public IEnumerable<Car> ReadAll()
+        public IEnumerable  <Car> ReadAll()
         {
             return carRepo.ReadAll();
         }

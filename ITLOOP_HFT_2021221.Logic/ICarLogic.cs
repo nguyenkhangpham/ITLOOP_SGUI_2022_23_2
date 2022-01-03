@@ -9,7 +9,7 @@ namespace ITLOOP_HFT_2021221.Logic
 {
     public interface ICarLogic<T> where T : class
     {
-        public void Insert(T car);
+        public void InsertCar(T car);
         public void Remove(int id);
         public T Read(int id);
         public void Update(T car);

@@ -21,7 +21,7 @@ namespace ITLOOP_HFT_2021221.Test
         private CarStoreLogic csl { get; set; }
         private RentingLogic rl { get; set; }
         private AppDbContext Context { get; set; }
-
+        [SetUp]
         public void Setup()
         {
             Mock<ICarRepository<Car>> mockedCarRepo = new Mock<ICarRepository<Car>>();
@@ -80,8 +80,8 @@ namespace ITLOOP_HFT_2021221.Test
         public void CreateCar_DoesNotThrowException(int id, string name, int price)
         {
             Car car = new Car()
-            { Id = id, CarName = name, SellingPrice = price };
-            Assert.That(() => cl.Insert(car), Throws.Nothing);
+            { Id = id, CarName = name, SellingPrice = price };  
+            Assert.That(() => cl.InsertCar(car), Throws.Nothing);
         }
 
         [TestCase(1, "Electric", "Rental Electric car")]
@@ -204,7 +204,7 @@ namespace ITLOOP_HFT_2021221.Test
         [Test]
         public void CarByName()
         {
-            var carItem = this.cl.CarWithSpecifyName("ferrari");
+            IEnumerable<Car> carItem = this.cl.CarWithSpecifyName("ferrari");
             foreach (var obj in carItem)
             {
                 Assert.That(obj.CarName == "ferrari");
