@@ -21,8 +21,6 @@ namespace ITLOOP_HFT_2021221.Client
 
             while (!exit1)
             {
-                // Variables used multiple times during the application
-
                 int userResponse;
                 int id;
                 Car car;
@@ -40,7 +38,6 @@ namespace ITLOOP_HFT_2021221.Client
 
                 Console.Clear();
 
-                // Start of the menu
                 switch (userResponse)
                 {
                     case 1:
@@ -334,7 +331,7 @@ namespace ITLOOP_HFT_2021221.Client
         }
         static void DefaultMenu()
         {
-            Console.WriteLine("Which action would you like to perform?\n");
+            Console.WriteLine("Choose the action!\n");
             Console.WriteLine("1. View a single item");
             Console.WriteLine("2. View all items");
             Console.WriteLine("3. Add a new item");
