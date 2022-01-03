@@ -276,7 +276,7 @@ namespace ITLOOP_HFT_2021221.Client
                                 case 4:
 
                                     Console.WriteLine("Updating an existinging item\n");
-                                    Console.WriteLine("Which army object would you like to update?");
+                                    Console.WriteLine("Which renting object would you like to update?");
                                     Console.WriteLine("Enter the renting id!");
                                     id = int.Parse(Console.ReadLine());
                                     renting = restService.Get<Renting>(id, "Renting");
