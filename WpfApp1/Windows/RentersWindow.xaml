@@ -88,7 +88,7 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <Button Command="{Binding AddRenterCommand}" Content="Add Renter" Margin="10" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" />
+                    <Button Command="{Binding AddRenterCommand}" Content="Add Renter" Background="LightBlue" Margin="10" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" />
                 </Grid>
             </Border>
             <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
@@ -106,10 +106,10 @@
                     <TextBox Text="{Binding SelectedRenter.RenterName}" Margin="10" Grid.Row="1"></TextBox>
                     <Label  Content="Renterers's amount : " Margin="10" Grid.Row="0" Grid.Column="1"/>
                     <TextBox Text="{Binding SelectedRenter.Amount}" Margin="10" Grid.Row="1" Grid.Column="1"></TextBox>
-                    <Button  Command="{Binding EditRenterCommand}" Content="Edit Renterer" Margin="10" Grid.Row="2" Grid.ColumnSpan="2" />
+                    <Button  Command="{Binding EditRenterCommand}" Background="LightBlue" Content="Edit Renterer" Margin="10" Grid.Row="2" Grid.ColumnSpan="2" />
                 </Grid>
             </Border>
-            <Button Command="{Binding DeleteRenterCommand}" Content="Delete Renterer" Margin="10" Grid.Row="2" />
+            <Button Command="{Binding DeleteRenterCommand}" Background="LightBlue" Content="Delete Renterer" Margin="10" Grid.Row="2" />
         </Grid>
     </Grid>
 </Window>

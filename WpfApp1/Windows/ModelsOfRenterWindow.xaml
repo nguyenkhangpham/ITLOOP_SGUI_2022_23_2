@@ -23,7 +23,7 @@
             </Grid.ColumnDefinitions>
             <Label Content="Renters' name:" Margin="10" Grid.Column="0"></Label>
             <TextBox Text="{Binding SearchRenter}" Margin="10" Grid.Row="0" Grid.Column="1"></TextBox>
-            <Button Command="{Binding Search}" Content="Search" Margin="10" Grid.Row="2" Grid.Column="2" />
+            <Button Command="{Binding Search}" Content="Search" Margin="10" Background="LightBlue" Grid.Row="2" Grid.Column="2" />
         </Grid>
 
         <ListBox 

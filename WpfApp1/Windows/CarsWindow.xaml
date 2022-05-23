@@ -51,7 +51,7 @@
                     </Grid.RowDefinitions>
                     <Label  Content="New cars' name : " Margin="10" Grid.Row="0"/>
                     <TextBox Text="{Binding NameOfCar}" Margin="10" Grid.Row="1"></TextBox>
-                    <Button Command="{Binding AddCarCommand}" Content="Add Car" Margin="10" Grid.Row="2" />
+                    <Button Command="{Binding AddCarCommand}" Background="LightBlue" Content="Add Car" Margin="10" Grid.Row="2" />
                 </Grid>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1">
@@ -63,10 +63,10 @@
                     </Grid.RowDefinitions>
                     <Label  Content="Cars' name : " Margin="10" Grid.Row="0"/>
                     <TextBox Text="{Binding SelectedCar.CarName}" Margin="10" Grid.Row="1"></TextBox>
-                    <Button  Command="{Binding EditCarCommand}" Content="Edit Car" Margin="10" Grid.Row="2" />
+                    <Button  Command="{Binding EditCarCommand}" Content="Edit Car" Background="LightBlue" Margin="10" Grid.Row="2" />
                 </Grid>
             </Border>
-            <Button Command="{Binding DeleteCarCommand}" Content="Delete Car" Margin="10" />
+            <Button Command="{Binding DeleteCarCommand}" Content="Delete Car" Background="LightBlue" Margin="10" />
         </StackPanel>
     </Grid>
 </Window>

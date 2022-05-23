@@ -24,7 +24,7 @@
             </Grid.ColumnDefinitions>
             <Label Content="Cars' name:" Margin="10,10,10,10" Grid.Column="0"></Label>
             <TextBox Text="{Binding SearchModel}" Margin="10,10,10,10" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"></TextBox>
-            <Button Command="{Binding Search}" Content="Search" Margin="10,10,10,10" Grid.Column="3" />
+            <Button Command="{Binding Search}" Content="Search" Background="LightBlue" Margin="10,10,10,10" Grid.Column="3" />
         </Grid>
 
         <ListBox 

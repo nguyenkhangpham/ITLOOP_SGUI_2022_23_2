@@ -100,7 +100,7 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <Button Command="{Binding AddModelCommand}" Content="Add Car" Margin="10" Grid.Row="4" Grid.ColumnSpan="2" />
+                    <Button Command="{Binding AddModelCommand}" Background="LightBlue" Content="Add Car" Margin="10" Grid.Row="4" Grid.ColumnSpan="2" />
                 </Grid>
             </Border>
             <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
@@ -131,10 +131,10 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <Button Command="{Binding EditModelCommand}" Content="Edit Car" Margin="10" Grid.Row="4" Grid.Column="1" />
+                    <Button Command="{Binding EditModelCommand}" Background="LightBlue" Content="Edit Car" Margin="10" Grid.Row="4" Grid.Column="1" />
                 </Grid>
             </Border>
-            <Button Grid.Row="2" Command="{Binding DeleteModelCommand}" Content="Delete Car" Margin="10" />
+            <Button Grid.Row="2" Command="{Binding DeleteModelCommand}" Background="LightBlue" Content="Delete Car" Margin="10" />
         </Grid>
     </Grid>
 </Window>

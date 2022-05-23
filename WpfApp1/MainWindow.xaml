@@ -20,9 +20,9 @@
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
 
-        <Button Command="{Binding ManageCarsCommand}" Content="Manage Cars" Margin="50" Grid.Column="0" Grid.Row="0" />
-        <Button Command="{Binding ManageCarStoresCommand}" Content="Manage CarStores" Margin="50" Grid.Column="0" Grid.Row="1" />
-        <Button Command="{Binding ManageRentingsCommand}" Content="Manage Renters" Margin="50" Grid.Column="1" Grid.Row="0" />
+        <Button Command="{Binding ManageCarsCommand}" Content="Manage Cars" Background="LightBlue" Margin="50" Grid.Column="0" Grid.Row="0" />
+        <Button Command="{Binding ManageCarStoresCommand}" Content="Manage CarStores" Background="LightBlue" Margin="50" Grid.Column="0" Grid.Row="1" />
+        <Button Command="{Binding ManageRentingsCommand}" Content="Manage Renters" Background="LightBlue" Margin="50" Grid.Column="1" Grid.Row="0" />
         <Grid Grid.Column="1" Grid.Row="1" Margin="0,17,0,-17">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"></RowDefinition>
@@ -31,10 +31,10 @@
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Command="{Binding RentersOfModel}" Content="Renters of a model" Grid.Row="0" />
-            <Button Command="{Binding ModelsOfRenter}" Content="Models of a renter" Grid.Row="1" />
-            <Button Command="{Binding ModelsBrand}" Content="A models' brand" Grid.Row="2" />
-            <Button Command="{Binding MostExpensiveCar}" Content="Who has the most expensive car?" Grid.Row="3" />
+            <Button Command="{Binding RentersOfModel}" Content="Renters of a car" Background="LightBlue" Grid.Row="0" />
+            <Button Command="{Binding ModelsOfRenter}" Content="Models of a renter" Background="LightBlue" Grid.Row="1" />
+            <Button Command="{Binding ModelsBrand}" Content="A Carstore" Background="LightBlue" Grid.Row="2" />
+            <Button Command="{Binding MostExpensiveCar}" Content="Who has the most expensive car?" Background="LightBlue" Grid.Row="3" />
         </Grid>
     </Grid>
 </Window>
