@@ -1,0 +1,51 @@
+﻿* {
+    font-size: 1.05em;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 1.4em;
+}
+
+h1, h3 {
+    text-align: center;
+}
+
+#formdiv {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+    #formdiv input, label, button {
+        margin: 5px;
+    }
+
+    #formdiv button {
+        padding: 10px;
+    }
+
+    #formdiv label {
+        font-weight: bolder;
+    }
+
+    #formdiv input {
+        padding: 6px;
+    }
+
+table, th, td {
+    border: 1px solid black;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}

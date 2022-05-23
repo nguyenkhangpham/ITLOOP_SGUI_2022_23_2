@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <h1>MainPage Manager</h1>
+    <h3>Select what you want to manage!</h3>
+    <div id="formdiv">
+        <button onclick="ToCars()">Cars</button>
+        <button onclick="ToCarStores()">CarStores</button>
+        <button onclick="ToRenting()">Rentings</button>
+    </div>
+</body>
+
+
+</html>
+<script>
+    function ToCars() {
+        location.replace("Car.html")
+    }
+    function ToCarStores() {
+        location.replace("CarStore.html")
+    }
+    function ToRenting() {
+        location.replace("Renting.html")
+    }
+</script>
