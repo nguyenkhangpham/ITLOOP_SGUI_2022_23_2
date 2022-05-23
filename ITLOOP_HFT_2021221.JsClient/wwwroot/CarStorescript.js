@@ -110,6 +110,3 @@ function create() {
         .catch((error) => { console.error('Error:', error); });
 }
 
-function ToIndex() {
-    location.replace("Index.html")
-}
