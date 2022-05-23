@@ -51,7 +51,7 @@
                     </Grid.RowDefinitions>
                     <Label  Content="New cars' name : " Margin="10" Grid.Row="0"/>
                     <TextBox Text="{Binding NameOfCar}" Margin="10" Grid.Row="1"></TextBox>
-                    <Button Command="{Binding AddCarCommand}" Content="Add Brand" Margin="10" Grid.Row="2" />
+                    <Button Command="{Binding AddCarCommand}" Content="Add Car" Margin="10" Grid.Row="2" />
                 </Grid>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1">
