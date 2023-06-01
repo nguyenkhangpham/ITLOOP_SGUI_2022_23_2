@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\ITLOOP_HFT_2021221.props" />
+</Project>
